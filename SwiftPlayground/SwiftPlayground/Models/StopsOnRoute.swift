@@ -16,8 +16,10 @@ class StopsOnRoute: EndpointLoader {
     var endpoint: EndpointType
     var cancellable: AnyCancellable?
     @Published var stops: [Model] = []
+    let route: PTV.Models.Route
 
     init(route: PTV.Models.Route) {
+        self.route = route
         self.endpoint = EndpointType(route: route)
     }
     

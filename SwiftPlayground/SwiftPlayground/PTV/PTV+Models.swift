@@ -87,5 +87,35 @@ extension PTV {
             let stopLongitude: Double
             let stopSequence: Int
         }
+
+        struct Departures: RootResultType {
+            let departures: [Departure]
+            
+            init() {
+                self.departures = []
+            }
+            
+            init(departures: [Departure]) {
+                self.departures = departures
+            }
+        }
+        
+        struct Departure: Codable, Identifiable {
+            typealias ID = String
+            var id: ID {
+                scheduledDepartureUtc
+            }
+            let stopId: Int
+            let routeId: Int
+            let runId: Int
+            let directionId: Int
+            let disruptionIds: [Int]
+            let scheduledDepartureUtc: String
+            let estimatedDepartureUtc: String?
+            let atPlatform: Bool
+            let platformNumber: String
+            let flags: String
+            let departureSequence: Int
+        }
     }
 }

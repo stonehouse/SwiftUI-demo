@@ -39,5 +39,19 @@ extension PTV {
                 path = "stops/route/\(route.routeId)/route_type/\(route.routeType)"
             }
         }
+        
+        struct DeparturesAtStop: Endpoint {
+            typealias ResultType = PTV.Models.Departures
+            let path: String
+            let query: [String: String] = [:]
+            
+            init(stop: PTV.Models.Stop) {
+                path = "departures/route_type/\(stop.routeType)/stop/\(stop.stopId)"
+            }
+            
+            init(stop: PTV.Models.Stop, route: PTV.Models.Route) {
+                path = "departures/route_type/\(stop.routeType)/stop/\(stop.stopId)/route/\(route.routeId)"
+            }
+        }
     }
 }

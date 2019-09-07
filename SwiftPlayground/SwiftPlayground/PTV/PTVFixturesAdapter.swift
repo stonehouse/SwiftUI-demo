@@ -45,6 +45,8 @@ class PTVFixturesAdapter: DataAdapter {
             return loadFixture("routes")
         } else if route is PTV.API.StopsOnRoute {
             return loadFixture("stops_route")
+        } else if route is PTV.API.DeparturesAtStop {
+            return loadFixture("departures")
         }
         
         return T.ResultType()
@@ -79,6 +81,20 @@ extension StopsOnRoute {
     static var fixture: StopsOnRoute {
         let fixture = StopsOnRoute(route: .fixture)
         fixture.stops = fixturesAdapter.fixture(for: fixture.endpoint).stops
+        return fixture
+    }
+}
+
+extension PTV.Models.Stop {
+    static var fixture: PTV.Models.Stop {
+        loadFixture("stop")
+    }
+}
+
+extension Departures {
+    static var fixture: Departures {
+        let fixture = Departures(stop: .fixture, route: .fixture)
+        fixture.departures = fixturesAdapter.fixture(for: fixture.endpoint).departures
         return fixture
     }
 }

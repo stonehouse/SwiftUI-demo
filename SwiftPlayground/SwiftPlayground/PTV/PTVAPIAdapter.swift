@@ -13,7 +13,7 @@ import Combine
 class PTVAPIAdapter: DataAdapter {
     static let `default`: DataAdapter = {
         let token = AccessToken( key: "27df7af0-a2e8-4dc9-805e-755035b5492d", developerID: 3001313)
-        return PTVAPIAdapter(token: token)
+        return PTVAPIAdapter(token: token, debug: false)
     }()
     
     struct AccessToken {
@@ -25,7 +25,7 @@ class PTVAPIAdapter: DataAdapter {
     let debug: Bool
     let decoder: JSONDecoder
     
-    init(token: AccessToken, debug: Bool = false) {
+    init(token: AccessToken, debug: Bool) {
         self.token = token
         self.debug = debug
         self.decoder = JSONDecoder()

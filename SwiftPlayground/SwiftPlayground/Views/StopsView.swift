@@ -21,7 +21,9 @@ struct StopsOnRouteView: View {
     
     var body: some View {
         List(model.stops) { stop in
-            Text("\(stop.stopName)")
+            NavigationLink(destination: DeparturesView(stop: stop, route: self.model.route).navigationBarTitle("Departures from \(stop.stopName)")) {
+                Text("\(stop.stopName)")
+            }
         }.onAppear(perform: appear)
     }
     
