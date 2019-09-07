@@ -12,18 +12,26 @@ import Combine
 
 private let baseURL = "https://timetableapi.ptv.vic.gov.au"
 private let apiVersion = "3"
+private let encoder = JSONEncoder()
 
 protocol Routable {
     associatedtype ResultType: Codable
     
-    var component: String { get }
     var path: String { get }
-    init()
+    var query: [String: String] { get }
+    func url(_ token: PTV.AccessToken) -> String?
 }
 
 extension Routable {
-    var path: String {
-        return "/v\(apiVersion)/\(component)"
+    func url(_ token: PTV.AccessToken) -> String? {
+        var components = URLComponents()
+        components.path = "/v\(apiVersion)/\(path)"
+        components.queryItems = query.compactMap {
+            return URLQueryItem(name: $0.key, value: $0.value)
+        }
+        components.queryItems?.append(URLQueryItem(name: "devid", value: "\(token.developerID)"))
+        
+        return components.string
     }
 }
 
@@ -45,9 +53,12 @@ class PTV {
         decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
     
-    private func prepare(path: String, token: AccessToken) -> URL? {
-        let url = String(format: "%@%@devid=%d", path, path.contains("?") ? "&" : "?", token.developerID)
+    private func prepare<T: Routable>(route: T, token: AccessToken) -> URL? {
+        guard let url = route.url(token) else {
+            return nil
+        }
         
+        print("Signing URL: \(url)")
         guard let keyData = token.key.data(using: .ascii), let urlData = url.data(using: .ascii) else {
             return nil
         }
@@ -63,7 +74,10 @@ class PTV {
         }
         let hmac = Data(bytes: hashBytes, count: digestLength)
         
-        return URL(string: String(format: "%@%@&signature=%@", baseURL, url, hmac.hexEncodedString(options: .upperCase)))
+        guard let signed = URL(string: String(format: "%@%@&signature=%@", baseURL, url, hmac.hexEncodedString(options: .upperCase))) else {
+            return nil
+        }
+        return signed
     }
     
     enum Errors: Error {
@@ -72,7 +86,7 @@ class PTV {
     }
     
     func request<T: Routable>(route: T) -> AnyPublisher<T.ResultType, URLError>  {
-        guard let url = prepare(path: route.path, token: token) else {
+        guard let url = prepare(route: route, token: token) else {
             print("Error signing route")
             return AnyPublisher(Empty())
         }
@@ -83,7 +97,7 @@ class PTV {
     }
     
     func requestRaw<T: Routable>(route: T) -> AnyPublisher<String, URLError>  {
-        guard let url = prepare(path: route.path, token: token) else {
+        guard let url = prepare(route: route, token: token) else {
             print("Error signing route")
             return AnyPublisher(Empty())
         }

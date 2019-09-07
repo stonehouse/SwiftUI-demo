@@ -13,14 +13,15 @@ class RouteTypes: RouteLoader {
     typealias Route = PTV.API.RouteTypes
     typealias Model = PTV.Models.RouteType
     
+    var loading = false
     var cancellable: AnyCancellable?
     @Published var routeTypes: [Model] = []
 
     init() {
-        resume()
+        resume(Route())
     }
     
-    func receive(value: PTV.Models.RouteTypes) {
+    func receive(value: Route.ResultType) {
         routeTypes = value.routeTypes
     }
 }

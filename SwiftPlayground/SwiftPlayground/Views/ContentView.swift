@@ -10,14 +10,9 @@ import SwiftUI
 import Combine
 
 struct ContentView: View {
-    @ObservedObject var types = RouteTypes()
-    
     var body: some View {
-        VStack {
-            Text("Swift UI 🥳")
-            ForEach(types.routeTypes) { routeType in
-                Text("\(routeType.routeType) \(routeType.routeTypeName)")
-            }
+        NavigationView {
+            RouteTypesView()
         }
     }
 }
