@@ -12,7 +12,11 @@ struct RoutesView: View {
     @ObservedObject var model: Routes
     
     init(routeTypes: [PTV.Models.RouteType]) {
-        self.model = Routes(routeTypes: routeTypes)
+        self.init(model: Routes(routeTypes: routeTypes))
+    }
+    
+    init(model: Routes) {
+        self.model = model
     }
     
     var body: some View {
@@ -20,6 +24,17 @@ struct RoutesView: View {
             NavigationLink(destination: RouteView(route: route)) {
                 Text(route.routeName)
             }
-        }
+        }.onAppear(perform: appear)
+    }
+    
+    func appear() {
+        model.load()
     }
 }
+
+struct RoutesView_Preview: PreviewProvider {
+    static var previews: some View {
+        RoutesView(model: .fixture)
+    }
+}
+

@@ -9,7 +9,11 @@
 import SwiftUI
 
 struct RouteTypesView: View {
-    @ObservedObject var model = RouteTypes()
+    @ObservedObject var model: RouteTypes
+
+    init(_ model: RouteTypes = RouteTypes()) {
+        self.model = model
+    }
     
     var body: some View {
         List(model.routeTypes) { routeType in
@@ -17,5 +21,16 @@ struct RouteTypesView: View {
                 Text(routeType.routeTypeName)
             }
         }.navigationBarTitle("PTV Services")
+        .onAppear(perform: appear)
+    }
+    
+    func appear() {
+        model.load()
+    }
+}
+
+struct RouteTypesView_Preview: PreviewProvider {
+    static var previews: some View {
+        RouteTypesView(.fixture)
     }
 }

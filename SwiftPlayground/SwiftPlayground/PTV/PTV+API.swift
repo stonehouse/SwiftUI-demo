@@ -10,12 +10,15 @@ import Foundation
 
 extension PTV {
     struct API {
-        struct RouteTypes: Routable {
+        static let baseURL = "https://timetableapi.ptv.vic.gov.au"
+        static let apiVersion = "3"
+        
+        struct RouteTypes: Endpoint {
             typealias ResultType = PTV.Models.RouteTypes
             let path = "route_types"
             let query = [String: String]()
         }
-        struct Routes: Routable {
+        struct Routes: Endpoint {
             typealias ResultType = PTV.Models.Routes
             let path: String
             let query: [String: String]
@@ -27,7 +30,7 @@ extension PTV {
                 self.path = "routes"
             }
         }
-        struct StopsOnRoute: Routable {
+        struct StopsOnRoute: Endpoint {
             typealias ResultType = PTV.Models.StopsOnRoute
             let path: String
             let query: [String: String] = [:]

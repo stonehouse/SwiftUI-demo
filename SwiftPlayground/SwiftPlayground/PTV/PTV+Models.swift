@@ -10,8 +10,16 @@ import Foundation
 
 extension PTV {
     struct Models {
-        struct RouteTypes: Codable {
+        struct RouteTypes: RootResultType {
             let routeTypes: [RouteType]
+            
+            init() {
+                routeTypes = []
+            }
+            
+            init(routeTypes: [RouteType]) {
+                self.routeTypes = routeTypes
+            }
         }
         
         struct RouteType: Codable, Identifiable {
@@ -23,8 +31,16 @@ extension PTV {
             let routeType: Int
         }
         
-        struct Routes: Codable {
+        struct Routes: RootResultType {
             let routes: [Route]
+            
+            init() {
+                self.routes = []
+            }
+            
+            init(routes: [Route]) {
+                self.routes = routes
+            }
         }
         
         struct Route: Codable, Identifiable {
@@ -45,8 +61,16 @@ extension PTV {
             let timestamp: String
         }
         
-        struct StopsOnRoute: Codable {
+        struct StopsOnRoute: RootResultType {
             let stops: [Stop]
+            
+            init() {
+                self.stops = []
+            }
+            
+            init(stops: [Stop]) {
+                self.stops = stops
+            }
         }
         
         struct Stop: Codable, Identifiable {

@@ -22,9 +22,16 @@ struct RouteView: View {
                 Text(model.routeServiceStatus.description)
             }
             Spacer()
-            NavigationLink(destination: StopsOnRouteView(route: model)) {
+            NavigationLink(destination: StopsOnRouteView(route: model).navigationBarTitle("Stops on \(model.routeName)")) {
                 Text("View Stops")
             }
         }.navigationBarTitle(model.routeName)
     }
 }
+
+struct RouteView_Preview: PreviewProvider {
+    static var previews: some View {
+        RouteView(route: .fixture)
+    }
+}
+

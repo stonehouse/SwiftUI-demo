@@ -9,25 +9,20 @@
 import Foundation
 import Combine
 
-private let token = PTV.AccessToken( key: "27df7af0-a2e8-4dc9-805e-755035b5492d", developerID: 3001313)
-let ptv = PTV(token: token)
-
-protocol RouteLoader: ObservableObject {
-    associatedtype Route: Routable
+protocol EndpointLoader: ObservableObject {
+    associatedtype EndpointType: Endpoint
     
-    var loading: Bool { get set }
+    var endpoint: EndpointType { get }
     var cancellable: AnyCancellable? { get set }
-    func receive(value: Route.ResultType)
-    func resume(_ route: Route)
+    func receive(value: EndpointType.ResultType)
+    func load()
 }
 
-extension RouteLoader {
-    func resume(_ route: Route) {
-        loading = true
-        cancellable = ptv.request(route: route)
+extension EndpointLoader {
+    func load() {
+        cancellable = ptv.request(route: endpoint)
                         .receive(on: RunLoop.main)
                         .sink(receiveCompletion: { c in
-                            self.loading = false
                             switch c {
                             case .failure(let err):
                                 print("Error: \(err)")

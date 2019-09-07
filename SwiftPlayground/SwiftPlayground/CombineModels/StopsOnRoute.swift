@@ -9,20 +9,20 @@
 import Foundation
 import Combine
 
-class StopsOnRoute: RouteLoader {
-    typealias Route = PTV.API.StopsOnRoute
+class StopsOnRoute: EndpointLoader {
+    typealias EndpointType = PTV.API.StopsOnRoute
     typealias Model = PTV.Models.Stop
     
-    var loading = false
+    var endpoint: EndpointType
     var cancellable: AnyCancellable?
     @Published var stops: [Model] = []
 
     init(route: PTV.Models.Route) {
-        resume(Route(route: route))
+        self.endpoint = EndpointType(route: route)
     }
     
-    func receive(value: Route.ResultType) {
-        stops = value.stops
+    func receive(value: EndpointType.ResultType) {
+        self.stops = value.stops
     }
 }
 

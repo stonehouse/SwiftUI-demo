@@ -8,20 +8,17 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
-class RouteTypes: RouteLoader {
-    typealias Route = PTV.API.RouteTypes
+class RouteTypes: EndpointLoader {
+    typealias EndpointType = PTV.API.RouteTypes
     typealias Model = PTV.Models.RouteType
     
-    var loading = false
+    let endpoint = EndpointType()
     var cancellable: AnyCancellable?
     @Published var routeTypes: [Model] = []
-
-    init() {
-        resume(Route())
-    }
     
-    func receive(value: Route.ResultType) {
-        routeTypes = value.routeTypes
+    func receive(value: EndpointType.ResultType) {
+        self.routeTypes = value.routeTypes
     }
 }

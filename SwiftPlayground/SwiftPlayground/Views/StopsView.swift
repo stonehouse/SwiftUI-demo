@@ -15,9 +15,24 @@ struct StopsOnRouteView: View {
         self.model = StopsOnRoute(route: route)
     }
     
+    init(model: StopsOnRoute) {
+        self.model = model
+    }
+    
     var body: some View {
         List(model.stops) { stop in
             Text("\(stop.stopName)")
-        }
+        }.onAppear(perform: appear)
+    }
+    
+    func appear() {
+        model.load()
     }
 }
+
+struct StopsOnRouteView_Preview: PreviewProvider {
+    static var previews: some View {
+        StopsOnRouteView(model: .fixture)
+    }
+}
+
