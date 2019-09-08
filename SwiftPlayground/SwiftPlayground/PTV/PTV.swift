@@ -11,7 +11,7 @@ import CommonCrypto
 import Combine
 
 protocol DataAdapter {
-    func request<T: Endpoint>(route: T) -> AnyPublisher<T.ResultType, PTV.Errors>
+    func request<T: Endpoint>(endpoint: T) -> AnyPublisher<T.ResultType, PTV.Errors>
 }
 
 let ptv: PTV = .default
@@ -34,6 +34,6 @@ class PTV: ObservableObject {
     }
     
     func request<T: Endpoint>(route: T) -> AnyPublisher<T.ResultType, Errors>  {
-        return adapter.request(route: route)
+        return adapter.request(endpoint: route)
     }
 }

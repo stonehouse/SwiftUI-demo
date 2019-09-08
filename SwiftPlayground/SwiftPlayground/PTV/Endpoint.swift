@@ -15,6 +15,7 @@ protocol RootResultType: Codable {
 protocol Endpoint {
     associatedtype ResultType: RootResultType
     
+    var cache: Bool { get }
     var path: String { get }
     var query: [String: String] { get }
     func url(_ userId: Int) -> String?

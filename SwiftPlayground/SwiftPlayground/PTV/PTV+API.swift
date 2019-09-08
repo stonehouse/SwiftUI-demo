@@ -15,12 +15,14 @@ extension PTV {
         
         struct RouteTypes: Endpoint {
             typealias ResultType = PTV.Models.RouteTypes
+            let cache = true
             let path = "route_types"
             let query = [String: String]()
         }
         
         struct Routes: Endpoint {
             typealias ResultType = PTV.Models.Routes
+            let cache = true
             let path: String
             let query: [String: String]
             
@@ -34,6 +36,7 @@ extension PTV {
         
         struct StopsOnRoute: Endpoint {
             typealias ResultType = PTV.Models.StopsOnRoute
+            let cache = true
             let path: String
             let query: [String: String] = [:]
             
@@ -44,6 +47,7 @@ extension PTV {
         
         struct DeparturesAtStop: Endpoint {
             typealias ResultType = PTV.Models.Departures
+            let cache = false
             let path: String
             let query: [String: String] = [:]
             
@@ -58,6 +62,7 @@ extension PTV {
         
         struct Directions: Endpoint {
             typealias ResultType = PTV.Models.Directions
+            let cache = true
             let path: String
             let query: [String: String] = [:]
             

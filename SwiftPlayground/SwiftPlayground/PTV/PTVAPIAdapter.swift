@@ -67,8 +67,8 @@ class PTVAPIAdapter: DataAdapter {
         return signed
     }
     
-    func request<T: Endpoint>(route: T) -> AnyPublisher<T.ResultType, PTV.Errors>  {
-        guard let url = prepare(route: route) else {
+    func request<T: Endpoint>(endpoint: T) -> AnyPublisher<T.ResultType, PTV.Errors>  {
+        guard let url = prepare(route: endpoint) else {
             print("Error signing route")
             return AnyPublisher(Empty())
         }
@@ -89,7 +89,7 @@ class PTVAPIAdapter: DataAdapter {
                         }
                         do {
                             let decoded = try self.decoder.decode(T.ResultType.self, from: $0.data)
-                            if self.useCache {
+                            if self.useCache && endpoint.cache {
                                 // Only cache if we parsed the data
                                 self.cache[url] = $0.data
                             }

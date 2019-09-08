@@ -34,8 +34,8 @@ private func loadFixture<ResultType: Codable>(_ name: String) -> ResultType {
 }
 
 class PTVFixturesAdapter: DataAdapter {
-    func request<T>(route: T) -> AnyPublisher<T.ResultType, PTV.Errors> where T : Endpoint {
-        AnyPublisher(Just(fixture(for: route)).mapError({ _ in PTV.Errors.other }))
+    func request<T>(endpoint: T) -> AnyPublisher<T.ResultType, PTV.Errors> where T : Endpoint {
+        AnyPublisher(Just(fixture(for: endpoint)).mapError({ _ in PTV.Errors.other }))
     }
     
     func fixture<T: Endpoint>(for route: T) -> T.ResultType {
