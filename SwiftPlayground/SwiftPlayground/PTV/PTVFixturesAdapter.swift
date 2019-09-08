@@ -20,6 +20,7 @@ private func loadFixture<ResultType: Codable>(_ name: String) -> ResultType {
     let bundle = Bundle.main
     let decoder = JSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
+    decoder.dateDecodingStrategy = .iso8601
     guard let path = bundle.path(forResource: name, ofType: "json"), let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else {
         fatalError("No fixtures for type \(ResultType.self)")
     }

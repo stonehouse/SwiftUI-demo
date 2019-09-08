@@ -31,6 +31,7 @@ class PTVAPIAdapter: DataAdapter {
         self.debug = debug
         self.decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
+        decoder.dateDecodingStrategy = .iso8601
     }
     
     let useCache: Bool

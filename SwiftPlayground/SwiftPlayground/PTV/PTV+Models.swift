@@ -101,7 +101,7 @@ extension PTV {
         }
         
         struct Departure: Codable, Identifiable {
-            typealias ID = String
+            typealias ID = Date
             var id: ID {
                 scheduledDepartureUtc
             }
@@ -110,8 +110,8 @@ extension PTV {
             let runId: Int
             let directionId: Int
             let disruptionIds: [Int]
-            let scheduledDepartureUtc: String
-            let estimatedDepartureUtc: String?
+            let scheduledDepartureUtc: Date
+            let estimatedDepartureUtc: Date?
             let atPlatform: Bool
             let platformNumber: String?
             let flags: String

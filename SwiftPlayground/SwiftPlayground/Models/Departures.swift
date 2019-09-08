@@ -29,7 +29,7 @@ class Departures: EndpointLoader {
     }
     
     func receive(value: EndpointType.ResultType) {
-        self.departures = value.departures
+        self.departures = value.departures.sorted(by: { $0.id < $1.id })
     }
 }
 
