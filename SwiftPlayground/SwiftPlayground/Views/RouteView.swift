@@ -10,28 +10,36 @@ import SwiftUI
 
 struct RouteView: View {
     var model: PTV.Models.Route
+    @ObservedObject var stops: StopsOnRoute
     
-    init(route: PTV.Models.Route) {
+    init(route: PTV.Models.Route, stops: StopsOnRoute? = nil) {
         self.model = route
+        self.stops = stops ?? StopsOnRoute(route: route)
     }
     
     var body: some View {
         VStack {
+            Text("\(model.routeName)").font(.title)
             HStack {
                 Text("Status:").bold()
                 Text(model.routeServiceStatus.description)
             }
-            Spacer()
-            NavigationLink(destination: StopsOnRouteView(route: model).navigationBarTitle("Stops on \(model.routeName)")) {
-                Text("View Stops")
+            List(stops.stops) { stop in
+                NavigationLink(destination: DeparturesView(stop: stop, route: self.model, directions: self.stops.directions).navigationBarTitle("Departures from \(stop.stopName)")) {
+                    Text("\(stop.stopName)")
+                }
             }
-        }.navigationBarTitle(model.routeName)
+        }.onAppear(perform: appear)
+    }
+    
+    func appear() {
+        stops.load()
     }
 }
 
 struct RouteView_Preview: PreviewProvider {
     static var previews: some View {
-        RouteView(route: .fixture)
+        RouteView(route: .fixture, stops: .fixture)
     }
 }
 

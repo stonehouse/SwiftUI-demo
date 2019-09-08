@@ -113,9 +113,33 @@ extension PTV {
             let scheduledDepartureUtc: String
             let estimatedDepartureUtc: String?
             let atPlatform: Bool
-            let platformNumber: String
+            let platformNumber: String?
             let flags: String
             let departureSequence: Int
+        }
+
+        struct Directions: RootResultType {
+            let directions: [Direction]
+            
+            init() {
+                directions = []
+            }
+            
+            init(directions: [Direction]) {
+                self.directions = directions
+            }
+        }
+        
+        struct Direction: Codable, Identifiable {
+            typealias ID = Int
+            var id: ID {
+                directionId
+            }
+            let routeDirectionDescription: String
+            let directionId: Int
+            let directionName: String
+            let routeId: Int
+            let routeType: Int
         }
     }
 }

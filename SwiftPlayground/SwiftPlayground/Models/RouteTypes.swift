@@ -15,7 +15,7 @@ class RouteTypes: EndpointLoader {
     typealias Model = PTV.Models.RouteType
     
     let endpoint = EndpointType()
-    var cancellable: AnyCancellable?
+    var cancellables: [AnyCancellable] = []
     @Published var routeTypes: [Model] = []
     
     func receive(value: EndpointType.ResultType) {

@@ -13,7 +13,7 @@ import Combine
 class PTVAPIAdapter: DataAdapter {
     static let `default`: DataAdapter = {
         let token = AccessToken( key: "27df7af0-a2e8-4dc9-805e-755035b5492d", developerID: 3001313)
-        return PTVAPIAdapter(token: token, debug: false)
+        return PTVAPIAdapter(token: token, cache: true, debug: true)
     }()
     
     struct AccessToken {
@@ -25,12 +25,16 @@ class PTVAPIAdapter: DataAdapter {
     let debug: Bool
     let decoder: JSONDecoder
     
-    init(token: AccessToken, debug: Bool) {
+    init(token: AccessToken, cache: Bool, debug: Bool) {
         self.token = token
+        self.useCache = cache
         self.debug = debug
         self.decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
     }
+    
+    let useCache: Bool
+    private var cache: [URL: Data] = [:]
     
     private func prepare<T: Endpoint>(route: T) -> URL? {
         guard let url = route.url(token.developerID) else {
@@ -68,13 +72,32 @@ class PTVAPIAdapter: DataAdapter {
             print("Error signing route")
             return AnyPublisher(Empty())
         }
+        
+        if let cached = cache[url], let decoded = try? self.decoder.decode(T.ResultType.self, from: cached) {
+            if debug {
+                print("Loading from cache...")
+            }
+            
+            return AnyPublisher(Just(decoded).mapError({ _ in PTV.Errors.other }))
+        }
+        
         return AnyPublisher(URLSession.shared.dataTaskPublisher(for: url)
                     .mapError({ PTV.Errors.network($0) })
                     .compactMap {
                         if self.debug {
                             print("Result from '\(url.absoluteString)': \(String(data: $0.data, encoding: .utf8) ?? "empty")")
                         }
-                        return try? self.decoder.decode(T.ResultType.self, from: $0.data)
+                        do {
+                            let decoded = try self.decoder.decode(T.ResultType.self, from: $0.data)
+                            if self.useCache {
+                                // Only cache if we parsed the data
+                                self.cache[url] = $0.data
+                            }
+                            return decoded
+                        } catch let e {
+                            print("Error deserializing \(String(describing: T.ResultType.self)): \(e)")
+                            return nil
+                        }
                     })
     }
 }

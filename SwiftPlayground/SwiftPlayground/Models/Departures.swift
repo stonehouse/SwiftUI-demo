@@ -15,10 +15,16 @@ class Departures: EndpointLoader {
     typealias Model = PTV.Models.Departure
     
     var endpoint: EndpointType
-    var cancellable: AnyCancellable?
+    var cancellables: [AnyCancellable] = []
+    let stop: PTV.Models.Stop
+    let route: PTV.Models.Route
+    let directions: [PTV.Models.Direction]
     @Published var departures: [Model] = []
 
-    init(stop: PTV.Models.Stop, route: PTV.Models.Route) {
+    init(stop: PTV.Models.Stop, route: PTV.Models.Route, directions: [PTV.Models.Direction]) {
+        self.stop = stop
+        self.route = route
+        self.directions = directions
         self.endpoint = EndpointType(stop: stop, route: route)
     }
     

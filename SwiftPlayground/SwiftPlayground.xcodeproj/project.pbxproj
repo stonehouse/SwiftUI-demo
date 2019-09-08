@@ -12,7 +12,6 @@
 		378AED3623231F6A0085DFF9 /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378AED3523231F6A0085DFF9 /* RoutesView.swift */; };
 		378AED38232330200085DFF9 /* StopsOnRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378AED37232330200085DFF9 /* StopsOnRoute.swift */; };
 		378AED3A232330650085DFF9 /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378AED39232330650085DFF9 /* RouteView.swift */; };
-		378AED3C232333050085DFF9 /* StopsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378AED3B232333050085DFF9 /* StopsView.swift */; };
 		FA0DFFD7231E74EC00CB8B0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DFFD6231E74EC00CB8B0A /* AppDelegate.swift */; };
 		FA0DFFD9231E74EC00CB8B0A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DFFD8231E74EC00CB8B0A /* SceneDelegate.swift */; };
 		FA0DFFDB231E74EC00CB8B0A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DFFDA231E74EC00CB8B0A /* ContentView.swift */; };
@@ -32,6 +31,7 @@
 		FA591F9B2323AD370066AD7A /* Departures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA591F9A2323AD370066AD7A /* Departures.swift */; };
 		FA591F9F2323AEED0066AD7A /* departures.json in Resources */ = {isa = PBXBuildFile; fileRef = FA591F9E2323AEED0066AD7A /* departures.json */; };
 		FA591FA12323AF990066AD7A /* stop.json in Resources */ = {isa = PBXBuildFile; fileRef = FA591FA02323AF990066AD7A /* stop.json */; };
+		FA591FA523247BDF0066AD7A /* directions.json in Resources */ = {isa = PBXBuildFile; fileRef = FA591FA423247BDF0066AD7A /* directions.json */; };
 		FA6C703A2321B24A007AA5C7 /* PTV+API.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C70392321B24A007AA5C7 /* PTV+API.swift */; };
 		FA6C703C2321B25F007AA5C7 /* PTV+Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C703B2321B25F007AA5C7 /* PTV+Models.swift */; };
 		FA6C703E2321B2A9007AA5C7 /* Data+hexEncodedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C703D2321B2A9007AA5C7 /* Data+hexEncodedString.swift */; };
@@ -45,7 +45,6 @@
 		378AED3523231F6A0085DFF9 /* RoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesView.swift; sourceTree = "<group>"; };
 		378AED37232330200085DFF9 /* StopsOnRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsOnRoute.swift; sourceTree = "<group>"; };
 		378AED39232330650085DFF9 /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
-		378AED3B232333050085DFF9 /* StopsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsView.swift; sourceTree = "<group>"; };
 		FA0DFFD3231E74EC00CB8B0A /* SwiftPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA0DFFD6231E74EC00CB8B0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA0DFFD8231E74EC00CB8B0A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -67,6 +66,7 @@
 		FA591F9A2323AD370066AD7A /* Departures.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Departures.swift; sourceTree = "<group>"; };
 		FA591F9E2323AEED0066AD7A /* departures.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = departures.json; sourceTree = "<group>"; };
 		FA591FA02323AF990066AD7A /* stop.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = stop.json; sourceTree = "<group>"; };
+		FA591FA423247BDF0066AD7A /* directions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = directions.json; sourceTree = "<group>"; };
 		FA6C70392321B24A007AA5C7 /* PTV+API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PTV+API.swift"; sourceTree = "<group>"; };
 		FA6C703B2321B25F007AA5C7 /* PTV+Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PTV+Models.swift"; sourceTree = "<group>"; };
 		FA6C703D2321B2A9007AA5C7 /* Data+hexEncodedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+hexEncodedString.swift"; sourceTree = "<group>"; };
@@ -92,7 +92,6 @@
 				378AED3323231EBF0085DFF9 /* RouteTypesView.swift */,
 				378AED3523231F6A0085DFF9 /* RoutesView.swift */,
 				378AED39232330650085DFF9 /* RouteView.swift */,
-				378AED3B232333050085DFF9 /* StopsView.swift */,
 				FA591F982323AC850066AD7A /* DeparturesView.swift */,
 			);
 			path = Views;
@@ -147,6 +146,7 @@
 				FA591F9623234DF20066AD7A /* route.json */,
 				FA591F9E2323AEED0066AD7A /* departures.json */,
 				FA591FA02323AF990066AD7A /* stop.json */,
+				FA591FA423247BDF0066AD7A /* directions.json */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -242,6 +242,7 @@
 				FA0DFFE3231E74EE00CB8B0A /* LaunchScreen.storyboard in Resources */,
 				FA0DFFE0231E74EE00CB8B0A /* Preview Assets.xcassets in Resources */,
 				FA591F9F2323AEED0066AD7A /* departures.json in Resources */,
+				FA591FA523247BDF0066AD7A /* directions.json in Resources */,
 				FA0DFFDD231E74EE00CB8B0A /* Assets.xcassets in Resources */,
 				FA591F8B23233AB30066AD7A /* route_types.json in Resources */,
 				FA591F8F23233B2D0066AD7A /* stops_route.json in Resources */,
@@ -271,7 +272,6 @@
 				378AED3223231E5B0085DFF9 /* Routes.swift in Sources */,
 				FA591F9123233F4B0066AD7A /* Endpoint.swift in Sources */,
 				378AED38232330200085DFF9 /* StopsOnRoute.swift in Sources */,
-				378AED3C232333050085DFF9 /* StopsView.swift in Sources */,
 				FA0DFFDB231E74EC00CB8B0A /* ContentView.swift in Sources */,
 				FA6C70452321B7CE007AA5C7 /* RouteTypes.swift in Sources */,
 				378AED3423231EBF0085DFF9 /* RouteTypesView.swift in Sources */,

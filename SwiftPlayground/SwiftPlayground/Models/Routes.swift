@@ -15,7 +15,7 @@ class Routes: EndpointLoader {
     typealias Model = PTV.Models.Route
     
     var endpoint: EndpointType
-    var cancellable: AnyCancellable?
+    var cancellables: [AnyCancellable] = []
     @Published var routes: [Model] = []
 
     init(routeTypes: [PTV.Models.RouteType]) {
