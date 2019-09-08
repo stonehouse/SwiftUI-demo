@@ -102,7 +102,8 @@ extension PTV.Models.Directions {
 
 extension Departures {
     static var fixture: Departures {
-        let fixture = Departures(stop: .fixture, route: .fixture, directions: PTV.Models.Directions.fixture.directions)
+        let now = Date(timeIntervalSince1970: 1567778879)
+        let fixture = Departures(stop: .fixture, route: .fixture, directions: PTV.Models.Directions.fixture.directions, now: now, filterOld: false)
         fixture.departures = fixturesAdapter.fixture(for: fixture.endpoint).departures
         return fixture
     }

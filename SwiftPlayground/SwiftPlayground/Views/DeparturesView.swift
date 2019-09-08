@@ -10,11 +10,6 @@ import SwiftUI
 
 struct DeparturesView: View {
     @ObservedObject var model: Departures
-    var departures: [Departures.Model] {
-        model.departures.sorted(by: {
-            $0.departureSequence < $1.departureSequence
-        })
-    }
     
     func direction(for departure: PTV.Models.Departure) -> PTV.Models.Direction? {
         model.directions.first(where: { $0.directionId == departure.directionId })
@@ -31,17 +26,27 @@ struct DeparturesView: View {
     var body: some View {
         VStack {
             Text("\(model.stop.stopName)").font(.title)
-            List(departures) { departure in
+            List(model.departuresSoon) { info in
                 VStack {
-                    Text("\(self.direction(for: departure)?.directionName ?? "\(departure.directionId)...") Platform \(departure.platformNumber ?? "9 3/4") ")
-                    Text("\(departure.scheduledDepartureUtc)")
+                    HStack {
+                        Text("\(self.direction(for: info.departure)?.directionName ?? "") ").bold()
+                        Spacer()
+                        Text(info.platform).foregroundColor(.gray)
+                    }
+                    HStack {
+                        Text("Departing in \(info.time)")
+                        Spacer()
+                    }
                 }
             }
-        }.onAppear(perform: appear)
+        }
+        .navigationBarTitle("Departures").onAppear(perform: appear)
     }
     
     func appear() {
-        model.load()
+        if model.departures.count == 0 {
+            model.load()
+        }
     }
 }
 

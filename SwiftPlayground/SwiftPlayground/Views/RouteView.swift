@@ -25,7 +25,7 @@ struct RouteView: View {
                 Text(model.routeServiceStatus.description)
             }
             List(stops.stops) { stop in
-                NavigationLink(destination: DeparturesView(stop: stop, route: self.model, directions: self.stops.directions).navigationBarTitle("Departures from \(stop.stopName)")) {
+                NavigationLink(destination: DeparturesView(stop: stop, route: self.model, directions: self.stops.directions)) {
                     Text("\(stop.stopName)")
                 }
             }
