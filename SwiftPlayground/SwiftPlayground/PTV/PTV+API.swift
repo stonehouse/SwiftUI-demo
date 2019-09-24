@@ -35,13 +35,24 @@ extension PTV {
         }
         
         struct StopsOnRoute: Endpoint {
-            typealias ResultType = PTV.Models.StopsOnRoute
+            typealias ResultType = PTV.Models.Stops
             let cache = true
             let path: String
             let query: [String: String] = [:]
             
             init(route: PTV.Models.Route) {
                 path = "stops/route/\(route.routeId)/route_type/\(route.routeType)"
+            }
+        }
+        
+        struct Stops: Endpoint {
+            typealias ResultType = PTV.Models.Stops
+            let cache = true
+            let path: String
+            let query: [String: String] = [:]
+            
+            init(latitude: Double, longitude: Double) {
+                path = "stops/location/\(latitude),\(longitude)"
             }
         }
         

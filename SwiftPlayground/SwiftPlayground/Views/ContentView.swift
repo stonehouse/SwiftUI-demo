@@ -12,8 +12,17 @@ import Combine
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            RouteTypesView().navigationBarItems(trailing:
-                NavigationLink(destination: SearchView(), label: { Image(systemName: "magnifyingglass") }))
+            VStack {
+                NavigationLink(destination: RouteTypesView(), label: {
+                    Text("Service Types")
+                }).padding(50)
+                NavigationLink(destination: StopsNearMeView(), label: {
+                    Text("Stops Near Me")
+                }).padding(50)
+            }
+            .navigationBarTitle("PTV SwiftUI 🥳")
+            .navigationBarItems(trailing:
+            NavigationLink(destination: SearchView(), label: { Image(systemName: "magnifyingglass") }))
         }
     }
 }

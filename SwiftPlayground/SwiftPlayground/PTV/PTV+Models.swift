@@ -61,7 +61,7 @@ extension PTV {
             let timestamp: String
         }
         
-        struct StopsOnRoute: RootResultType {
+        struct Stops: RootResultType {
             let stops: [Stop]
             
             init() {
