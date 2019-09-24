@@ -70,5 +70,16 @@ extension PTV {
                 path = "directions/route/\(route.routeId)"
             }
         }
+        
+        struct Search: Endpoint {
+            typealias ResultType = PTV.Models.Search
+            let cache = false
+            let path: String
+            let query: [String: String] = [:]
+            
+            init(searchTerm: String) {
+                path = "search/\(searchTerm)"
+            }
+        }
     }
 }

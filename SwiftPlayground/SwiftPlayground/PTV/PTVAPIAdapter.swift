@@ -83,22 +83,23 @@ class PTVAPIAdapter: DataAdapter {
         }
         
         return AnyPublisher(URLSession.shared.dataTaskPublisher(for: url)
-                    .mapError({ PTV.Errors.network($0) })
-                    .compactMap {
+                    .tryCompactMap {
                         if self.debug {
                             print("Result from '\(url.absoluteString)': \(String(data: $0.data, encoding: .utf8) ?? "empty")")
                         }
-                        do {
-                            let decoded = try self.decoder.decode(T.ResultType.self, from: $0.data)
-                            if self.useCache && endpoint.cache {
-                                // Only cache if we parsed the data
-                                self.cache[url] = $0.data
-                            }
-                            return decoded
-                        } catch let e {
-                            print("Error deserializing \(String(describing: T.ResultType.self)): \(e)")
-                            return nil
+                        let decoded = try self.decoder.decode(T.ResultType.self, from: $0.data)
+                        if self.useCache && endpoint.cache {
+                            // Only cache if we parsed the data
+                            self.cache[url] = $0.data
                         }
-                    })
+                        return decoded
+                    }.mapError({ err in
+                        switch err {
+                        case let e as URLError:
+                            return PTV.Errors.network(e)
+                        default:
+                            return PTV.Errors.encoding(err)
+                        }
+                    }))
     }
 }

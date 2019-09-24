@@ -78,7 +78,7 @@ extension PTV {
             var id: ID {
                 stopId
             }
-            let disruptionIds: [Int]
+            let disruptionIds: [Int]?
             let stopSuburb: String
             let stopName: String
             let stopId: Int
@@ -109,7 +109,7 @@ extension PTV {
             let routeId: Int
             let runId: Int
             let directionId: Int
-            let disruptionIds: [Int]
+            let disruptionIds: [Int]?
             let scheduledDepartureUtc: Date
             let estimatedDepartureUtc: Date?
             let atPlatform: Bool
@@ -140,6 +140,16 @@ extension PTV {
             let directionName: String
             let routeId: Int
             let routeType: Int
+        }
+        
+        struct Search: RootResultType {
+            let stops: [Stop]
+            let routes: [Route]
+            
+            init() {
+                stops = []
+                routes = []
+            }
         }
     }
 }

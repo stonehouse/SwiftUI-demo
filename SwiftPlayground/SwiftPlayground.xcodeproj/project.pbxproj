@@ -12,6 +12,9 @@
 		378AED3623231F6A0085DFF9 /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378AED3523231F6A0085DFF9 /* RoutesView.swift */; };
 		378AED38232330200085DFF9 /* StopsOnRoute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378AED37232330200085DFF9 /* StopsOnRoute.swift */; };
 		378AED3A232330650085DFF9 /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 378AED39232330650085DFF9 /* RouteView.swift */; };
+		37EB98AF23399C35006E0F65 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB98AE23399C35006E0F65 /* Search.swift */; };
+		37EB98B82339BDE1006E0F65 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB98B72339BDE1006E0F65 /* SearchView.swift */; };
+		37EB98BA233ABFFF006E0F65 /* search.json in Resources */ = {isa = PBXBuildFile; fileRef = 37EB98B9233ABFFF006E0F65 /* search.json */; };
 		FA0DFFD7231E74EC00CB8B0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DFFD6231E74EC00CB8B0A /* AppDelegate.swift */; };
 		FA0DFFD9231E74EC00CB8B0A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DFFD8231E74EC00CB8B0A /* SceneDelegate.swift */; };
 		FA0DFFDB231E74EC00CB8B0A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DFFDA231E74EC00CB8B0A /* ContentView.swift */; };
@@ -45,6 +48,9 @@
 		378AED3523231F6A0085DFF9 /* RoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesView.swift; sourceTree = "<group>"; };
 		378AED37232330200085DFF9 /* StopsOnRoute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsOnRoute.swift; sourceTree = "<group>"; };
 		378AED39232330650085DFF9 /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
+		37EB98AE23399C35006E0F65 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
+		37EB98B72339BDE1006E0F65 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
+		37EB98B9233ABFFF006E0F65 /* search.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
 		FA0DFFD3231E74EC00CB8B0A /* SwiftPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA0DFFD6231E74EC00CB8B0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA0DFFD8231E74EC00CB8B0A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -93,6 +99,7 @@
 				378AED3523231F6A0085DFF9 /* RoutesView.swift */,
 				378AED39232330650085DFF9 /* RouteView.swift */,
 				FA591F982323AC850066AD7A /* DeparturesView.swift */,
+				37EB98B72339BDE1006E0F65 /* SearchView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -147,6 +154,7 @@
 				FA591F9E2323AEED0066AD7A /* departures.json */,
 				FA591FA02323AF990066AD7A /* stop.json */,
 				FA591FA423247BDF0066AD7A /* directions.json */,
+				37EB98B9233ABFFF006E0F65 /* search.json */,
 			);
 			path = Fixtures;
 			sourceTree = "<group>";
@@ -175,6 +183,7 @@
 				378AED3123231E5B0085DFF9 /* Routes.swift */,
 				378AED37232330200085DFF9 /* StopsOnRoute.swift */,
 				FA591F9A2323AD370066AD7A /* Departures.swift */,
+				37EB98AE23399C35006E0F65 /* Search.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -239,6 +248,7 @@
 			files = (
 				FA591F8D23233AE40066AD7A /* routes.json in Resources */,
 				FA591FA12323AF990066AD7A /* stop.json in Resources */,
+				37EB98BA233ABFFF006E0F65 /* search.json in Resources */,
 				FA0DFFE3231E74EE00CB8B0A /* LaunchScreen.storyboard in Resources */,
 				FA0DFFE0231E74EE00CB8B0A /* Preview Assets.xcassets in Resources */,
 				FA591F9F2323AEED0066AD7A /* departures.json in Resources */,
@@ -263,11 +273,13 @@
 				FA6C703C2321B25F007AA5C7 /* PTV+Models.swift in Sources */,
 				FA6C703E2321B2A9007AA5C7 /* Data+hexEncodedString.swift in Sources */,
 				378AED3623231F6A0085DFF9 /* RoutesView.swift in Sources */,
+				37EB98AF23399C35006E0F65 /* Search.swift in Sources */,
 				FA591F9B2323AD370066AD7A /* Departures.swift in Sources */,
 				FA0DFFD9231E74EC00CB8B0A /* SceneDelegate.swift in Sources */,
 				FA6C70442321B63A007AA5C7 /* EndpointLoader.swift in Sources */,
 				FA0DFFEB231E78A200CB8B0A /* PTV.swift in Sources */,
 				FA591F992323AC850066AD7A /* DeparturesView.swift in Sources */,
+				37EB98B82339BDE1006E0F65 /* SearchView.swift in Sources */,
 				378AED3A232330650085DFF9 /* RouteView.swift in Sources */,
 				378AED3223231E5B0085DFF9 /* Routes.swift in Sources */,
 				FA591F9123233F4B0066AD7A /* Endpoint.swift in Sources */,

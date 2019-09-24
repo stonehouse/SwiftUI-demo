@@ -12,7 +12,8 @@ import Combine
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            RouteTypesView()
+            RouteTypesView().navigationBarItems(trailing:
+                NavigationLink(destination: SearchView(), label: { Image(systemName: "magnifyingglass") }))
         }
     }
 }

@@ -108,3 +108,15 @@ extension Departures {
         return fixture
     }
 }
+
+extension PTV.Models.Search {
+    static var fixture: PTV.Models.Search {
+        loadFixture("search")
+    }
+}
+
+extension Search {
+    static var fixture: Search {
+        Search(search: .fixture)
+    }
+}

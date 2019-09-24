@@ -14,6 +14,7 @@ protocol DataAdapter {
     func request<T: Endpoint>(endpoint: T) -> AnyPublisher<T.ResultType, PTV.Errors>
 }
 
+/// This is where you can specify either 'default' or 'fixtures' version of the PTV client.
 let ptv: PTV = .default
 
 class PTV: ObservableObject {
@@ -30,6 +31,7 @@ class PTV: ObservableObject {
     
     enum Errors: Error {
         case network(URLError)
+        case encoding(Error)
         case other
     }
     
