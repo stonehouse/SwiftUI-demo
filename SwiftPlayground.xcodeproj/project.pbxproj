@@ -41,6 +41,7 @@
 		FA6C703E2321B2A9007AA5C7 /* Data+HexEncodedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C703D2321B2A9007AA5C7 /* Data+HexEncodedString.swift */; };
 		FA6C70442321B63A007AA5C7 /* EndpointLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C70432321B63A007AA5C7 /* EndpointLoader.swift */; };
 		FA6C70452321B7CE007AA5C7 /* RouteTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6C703F2321B2E3007AA5C7 /* RouteTypes.swift */; };
+		FA6F76CE233B55100067A80C /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FA6F76CD233B55100067A80C /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +81,7 @@
 		FA6C703D2321B2A9007AA5C7 /* Data+HexEncodedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Data+HexEncodedString.swift"; sourceTree = "<group>"; };
 		FA6C703F2321B2E3007AA5C7 /* RouteTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteTypes.swift; sourceTree = "<group>"; };
 		FA6C70432321B63A007AA5C7 /* EndpointLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndpointLoader.swift; sourceTree = "<group>"; };
+		FA6F76CD233B55100067A80C /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +146,7 @@
 		FA0DFFCA231E74EC00CB8B0A = {
 			isa = PBXGroup;
 			children = (
+				FA6F76CD233B55100067A80C /* README.md */,
 				FA0DFFD5231E74EC00CB8B0A /* SwiftPlayground */,
 				FA0DFFD4231E74EC00CB8B0A /* Products */,
 				44B3466C233B1CB500108B06 /* Frameworks */,
@@ -289,6 +292,7 @@
 				FA0DFFE3231E74EE00CB8B0A /* LaunchScreen.storyboard in Resources */,
 				FA0DFFE0231E74EE00CB8B0A /* Preview Assets.xcassets in Resources */,
 				FA591F9F2323AEED0066AD7A /* departures.json in Resources */,
+				FA6F76CE233B55100067A80C /* README.md in Resources */,
 				FA591FA523247BDF0066AD7A /* directions.json in Resources */,
 				FA0DFFDD231E74EE00CB8B0A /* Assets.xcassets in Resources */,
 				FA591F8B23233AB30066AD7A /* route_types.json in Resources */,
