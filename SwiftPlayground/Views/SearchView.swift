@@ -24,11 +24,14 @@ struct SearchView: View {
                     TextField("Search", text: $searchTerm, onEditingChanged: { _ in }, onCommit: {
                         self.model.update(search: self.searchTerm)
                     })
-                }.padding(4)
-            }.overlay(
-                RoundedRectangle(cornerRadius: 16)
-                    .stroke(Color.gray, lineWidth: 2)
-            )
+                }
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+            }
+            .background(Color(.secondarySystemFill))
+            .clipShape(Capsule())
+            .overlay(Capsule().stroke(Color.gray, lineWidth: 2))
+            .padding(.horizontal, 10)
             List {
                  ForEach(self.model.routes) { result in
                      NavigationLink(destination: RouteView(route: result), label: {

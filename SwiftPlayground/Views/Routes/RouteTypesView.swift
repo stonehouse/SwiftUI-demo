@@ -20,7 +20,7 @@ struct RouteTypesView: View {
             NavigationLink(destination: RoutesView(routeTypes: [routeType]).navigationBarTitle(routeType.routeTypeName)) {
                 Text(routeType.routeTypeName)
             }
-        }.navigationBarTitle("PTV Services")
+        }
         .onAppear(perform: appear)
     }
     
