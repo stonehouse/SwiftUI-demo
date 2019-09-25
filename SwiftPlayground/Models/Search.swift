@@ -37,7 +37,7 @@ class Search: EndpointLoader {
     @Published var routes: [Route] = []
     @Published var results: [Result] = []
     var cancellable: AnyCancellable?
-    private let subject = PassthroughSubject<String, Error>()
+    private let subject = PassthroughSubject<String, PTV.Errors>()
 
     /// For fixtures
     init(search: EndpointType.ResultType) {
@@ -46,9 +46,6 @@ class Search: EndpointLoader {
     
     init() {
         cancellable = subject
-            .mapError({ _ in
-                PTV.Errors.other
-            })
             .flatMap({ searchTerm in
                 ptv.request(route: EndpointType(searchTerm: searchTerm))
             })

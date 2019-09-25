@@ -10,20 +10,20 @@ import SwiftUI
 import MapKit
 
 struct MapView: UIViewRepresentable {
-    func makeUIView(context: Context) -> MKMapView {
-        MKMapView(frame: .zero)
+    func makeUIView(context: Context) -> MapWrapper {
+        MapWrapper()
     }
 
-    func updateUIView(_ view: MKMapView, context: Context) {
-        view.showsUserLocation = true
+    func updateUIView(_ view: MapWrapper, context: Context) {
+        view.mapView.showsUserLocation = true
     }
     
-    func setRegion(_ view: MKMapView, latitude: Double, longitude: Double) {
+    func setRegion(_ view: MapWrapper, latitude: Double, longitude: Double) {
         let coordinate = CLLocationCoordinate2D(
             latitude: latitude, longitude: longitude)
         let span = MKCoordinateSpan(latitudeDelta: 2.0, longitudeDelta: 2.0)
         let region = MKCoordinateRegion(center: coordinate, span: span)
-        view.setRegion(region, animated: true)
+        view.mapView.setRegion(region, animated: true)
     }
 }
 

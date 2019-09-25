@@ -17,6 +17,8 @@
 		37EB98BA233ABFFF006E0F65 /* search.json in Resources */ = {isa = PBXBuildFile; fileRef = 37EB98B9233ABFFF006E0F65 /* search.json */; };
 		37EB98C0233AC8C1006E0F65 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB98BF233AC8C1006E0F65 /* MapView.swift */; };
 		37EB98C2233AC934006E0F65 /* StopsNearMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB98C1233AC934006E0F65 /* StopsNearMeView.swift */; };
+		37EB98C5233AD94C006E0F65 /* LocationAccessManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB98C4233AD94C006E0F65 /* LocationAccessManager.swift */; };
+		37EB98C7233ADECB006E0F65 /* MapWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB98C6233ADECB006E0F65 /* MapWrapper.swift */; };
 		FA0DFFD7231E74EC00CB8B0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DFFD6231E74EC00CB8B0A /* AppDelegate.swift */; };
 		FA0DFFD9231E74EC00CB8B0A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DFFD8231E74EC00CB8B0A /* SceneDelegate.swift */; };
 		FA0DFFDB231E74EC00CB8B0A /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DFFDA231E74EC00CB8B0A /* RootView.swift */; };
@@ -55,6 +57,8 @@
 		37EB98B9233ABFFF006E0F65 /* search.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
 		37EB98BF233AC8C1006E0F65 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		37EB98C1233AC934006E0F65 /* StopsNearMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsNearMeView.swift; sourceTree = "<group>"; };
+		37EB98C4233AD94C006E0F65 /* LocationAccessManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationAccessManager.swift; sourceTree = "<group>"; };
+		37EB98C6233ADECB006E0F65 /* MapWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapWrapper.swift; sourceTree = "<group>"; };
 		FA0DFFD3231E74EC00CB8B0A /* SwiftPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA0DFFD6231E74EC00CB8B0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA0DFFD8231E74EC00CB8B0A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,8 +143,18 @@
 		44B3466C233B1CB500108B06 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37EB98BF233AC8C1006E0F65 /* MapView.swift */,
+				37EB98C6233ADECB006E0F65 /* MapWrapper.swift */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		37EB98C3233AD93F006E0F65 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				37EB98C4233AD94C006E0F65 /* LocationAccessManager.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		FA0DFFCA231E74EC00CB8B0A = {
@@ -168,6 +182,7 @@
 				FA0DFFD8231E74EC00CB8B0A /* SceneDelegate.swift */,
 				377664C723230E4D0098EC8A /* Views */,
 				FA6C70422321B630007AA5C7 /* Models */,
+				37EB98C3233AD93F006E0F65 /* Utils */,
 				FA6C70382321B236007AA5C7 /* PTV */,
 				44B34669233B1AEC00108B06 /* Resources */,
 				FA0DFFDE231E74EE00CB8B0A /* Preview Content */,
@@ -319,9 +334,11 @@
 				FA0DFFD9231E74EC00CB8B0A /* SceneDelegate.swift in Sources */,
 				37EB98C0233AC8C1006E0F65 /* MapView.swift in Sources */,
 				FA6C70442321B63A007AA5C7 /* EndpointLoader.swift in Sources */,
+				37EB98C5233AD94C006E0F65 /* LocationAccessManager.swift in Sources */,
 				FA0DFFEB231E78A200CB8B0A /* PTV.swift in Sources */,
 				FA591F992323AC850066AD7A /* DeparturesView.swift in Sources */,
 				37EB98B82339BDE1006E0F65 /* SearchView.swift in Sources */,
+				37EB98C7233ADECB006E0F65 /* MapWrapper.swift in Sources */,
 				378AED3A232330650085DFF9 /* RouteView.swift in Sources */,
 				378AED3223231E5B0085DFF9 /* Routes.swift in Sources */,
 				FA591F9123233F4B0066AD7A /* Endpoint.swift in Sources */,
