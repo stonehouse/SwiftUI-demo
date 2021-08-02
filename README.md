@@ -1,6 +1,6 @@
-# SwiftUI Get-Together 🥳
+# SwiftUI Demo App 🥳
 
-Your task is to write some code, it could be anything! Maybe you want to make some cool custom animations, learn how to embed UIKit views in SwiftUI and vice versa, integrate Core Data with SwiftUI/Combine, perhaps just learn the basics, the world is your oyster.
+This is a demo app built using SwiftUI that works with the Public Transport Victoria (PTV) API. This is a demo both of building UI in SwiftUI as well as managing data flow with Combine. This repo is intended to serve as a playground for trying out SwiftUI.
 
 #### Getting Started
 
