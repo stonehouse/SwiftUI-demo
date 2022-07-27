@@ -8,7 +8,6 @@
 
 import Foundation
 import CommonCrypto
-import Combine
 
 protocol DataAdapter {
     func request<E: Endpoint>(endpoint: E) async throws -> E.ResultType

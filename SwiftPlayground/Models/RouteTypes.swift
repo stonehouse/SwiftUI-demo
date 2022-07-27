@@ -6,8 +6,6 @@
 //  Copyright © 2019 alex. All rights reserved.
 //
 
-import Foundation
-import Combine
 import SwiftUI
 
 class RouteTypes: ViewModel {

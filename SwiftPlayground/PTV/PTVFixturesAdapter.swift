@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Combine
 
 private let fixturesAdapter = PTVFixturesAdapter()
 extension PTV {

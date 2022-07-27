@@ -7,8 +7,6 @@
 //
 
 import Foundation
-import Combine
-
 
 class Departures: ViewModel {
     typealias Model = PTV.Models.Departure
@@ -30,7 +28,6 @@ class Departures: ViewModel {
     
     let formatter: DateFormatter
     let endpoint: PTV.API.DeparturesAtStop
-    var cancellables: [AnyCancellable] = []
     let stop: PTV.Models.Stop
     let route: PTV.Models.Route
     let directions: [PTV.Models.Direction]
