@@ -21,11 +21,7 @@ struct RouteTypesView: View {
                 Text(routeType.routeTypeName)
             }
         }
-        .onAppear(perform: appear)
-    }
-    
-    func appear() {
-        model.load()
+        .task { await model.bind() }
     }
 }
 

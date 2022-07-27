@@ -9,31 +9,28 @@
 import SwiftUI
 
 struct RouteView: View {
-    var model: PTV.Models.Route
-    @ObservedObject var stops: StopsOnRoute
+    var route: PTV.Models.Route
+    @ObservedObject var model: StopsOnRoute
     
     init(route: PTV.Models.Route, stops: StopsOnRoute? = nil) {
-        self.model = route
-        self.stops = stops ?? StopsOnRoute(route: route)
+        self.route = route
+        self.model = stops ?? StopsOnRoute(route: route)
     }
     
     var body: some View {
         VStack {
-            Text("\(model.routeName)").font(.title)
+            Text("\(route.routeName)").font(.title)
             HStack {
                 Text("Status:").bold()
-                Text(model.routeServiceStatus.description)
+                Text(route.routeServiceStatus.description)
             }
-            List(stops.stops) { stop in
-                NavigationLink(destination: DeparturesView(stop: stop, route: self.model, directions: self.stops.directions)) {
+            List(model.stops) { stop in
+                NavigationLink(destination: DeparturesView(stop: stop, route: self.route, directions: self.model.directions)) {
                     Text("\(stop.stopName)")
                 }
             }
-        }.onAppear(perform: appear)
-    }
-    
-    func appear() {
-        stops.load()
+        }
+        .task { await model.bind() }
     }
 }
 

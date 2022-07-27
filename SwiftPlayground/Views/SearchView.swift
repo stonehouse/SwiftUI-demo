@@ -39,11 +39,8 @@ struct SearchView: View {
                      })
                  }
             }
-        }.onAppear(perform: appear)
-    }
-    
-    func appear() {
-        
+        }
+        .task { await model.bind() }
     }
 }
 

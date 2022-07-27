@@ -12,7 +12,7 @@ protocol RootResultType: Codable {
     init()
 }
 
-protocol Endpoint {
+protocol Endpoint<ResultType> {
     associatedtype ResultType: RootResultType
     
     var cache: Bool { get }

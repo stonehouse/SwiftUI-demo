@@ -40,13 +40,8 @@ struct DeparturesView: View {
                 }
             }
         }
-        .navigationBarTitle("Departures").onAppear(perform: appear)
-    }
-    
-    func appear() {
-        if model.departures.count == 0 {
-            model.load()
-        }
+        .navigationBarTitle("Departures")
+        .task { await model.bind() }
     }
 }
 

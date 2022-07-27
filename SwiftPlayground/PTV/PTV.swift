@@ -11,7 +11,7 @@ import CommonCrypto
 import Combine
 
 protocol DataAdapter {
-    func request<T: Endpoint>(endpoint: T) -> AnyPublisher<T.ResultType, PTV.Errors>
+    func request<E: Endpoint>(endpoint: E) async throws -> E.ResultType
 }
 
 /// This is where you can specify either 'default' or 'fixtures' version of the PTV client.
@@ -19,7 +19,7 @@ let ptv: PTV = .default
 
 class PTV: ObservableObject {
     static let `default`: PTV = {
-        let adapter = PTVAPIAdapter.default
+        let adapter = PTVAsyncAPIAdapter.default
         return PTV(adapter: adapter)
     }()
     
@@ -35,7 +35,7 @@ class PTV: ObservableObject {
         case other
     }
     
-    func request<T: Endpoint>(route: T) -> AnyPublisher<T.ResultType, Errors>  {
-        return adapter.request(endpoint: route)
+    func request<E: Endpoint>(endpoint: E) async throws -> E.ResultType {
+        return try await adapter.request(endpoint: endpoint)
     }
 }

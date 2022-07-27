@@ -10,20 +10,24 @@ import Foundation
 import Combine
 import SwiftUI
 
-class Routes: EndpointLoader {
-    typealias EndpointType = PTV.API.Routes
+class Routes: ViewModel {
     typealias Model = PTV.Models.Route
     
-    var endpoint: EndpointType
-    var cancellables: [AnyCancellable] = []
+    private let endpoint: PTV.API.Routes
     @Published var routes: [Model] = []
 
     init(routeTypes: [PTV.Models.RouteType]) {
-        self.endpoint = EndpointType(routeTypes: routeTypes)
+        self.endpoint = PTV.API.Routes(routeTypes: routeTypes)
     }
     
-    func receive(value: EndpointType.ResultType) {
-        self.routes = value.routes
+    @MainActor
+    func bind() async {
+        do {
+            let result = try await ptv.request(endpoint: endpoint)
+            self.routes = result.routes
+        } catch _ {
+            
+        }
     }
 }
 

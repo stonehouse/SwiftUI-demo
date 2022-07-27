@@ -24,11 +24,8 @@ struct RoutesView: View {
             NavigationLink(destination: RouteView(route: route)) {
                 Text(route.routeName)
             }
-        }.onAppear(perform: appear)
-    }
-    
-    func appear() {
-        model.load()
+        }
+        .task { await model.bind() }
     }
 }
 

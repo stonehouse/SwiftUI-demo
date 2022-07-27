@@ -10,8 +10,7 @@ import Foundation
 import Combine
 
 
-class Departures: EndpointLoader {
-    typealias EndpointType = PTV.API.DeparturesAtStop
+class Departures: ViewModel {
     typealias Model = PTV.Models.Departure
     
     struct DepartureInfo: Identifiable {
@@ -30,7 +29,7 @@ class Departures: EndpointLoader {
     }
     
     let formatter: DateFormatter
-    var endpoint: EndpointType
+    let endpoint: PTV.API.DeparturesAtStop
     var cancellables: [AnyCancellable] = []
     let stop: PTV.Models.Stop
     let route: PTV.Models.Route
@@ -55,12 +54,18 @@ class Departures: EndpointLoader {
         self.directions = directions
         self.now = now
         self.filterOld = filterOld
-        self.endpoint = EndpointType(stop: stop, route: route)
+        self.endpoint = PTV.API.DeparturesAtStop(stop: stop, route: route)
         self.formatter = DateFormatter()
     }
     
-    func receive(value: EndpointType.ResultType) {
-        self.departures = value.departures.sorted(by: { $0.id > $1.id })
+    @MainActor
+    func bind() async {
+        do {
+            let result = try await ptv.request(endpoint: endpoint)
+            self.departures = result.departures.sorted(by: { $0.id > $1.id })
+        } catch _ {
+            
+        }
     }
 }
 
