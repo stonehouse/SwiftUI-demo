@@ -7,92 +7,52 @@
 //
 
 import Foundation
-import CommonCrypto
+import os
 
 actor PTVAsyncAPIAdapter: DataAdapter {
-    struct AccessToken {
-        let key: String
-        let developerID: Int
-    }
-    
     static let `default`: PTVAsyncAPIAdapter = {
-        let token = AccessToken( key: "27df7af0-a2e8-4dc9-805e-755035b5492d", developerID: 3001313)
+        let token = PTVAccessToken(key: "27df7af0-a2e8-4dc9-805e-755035b5492d", developerID: 3001313)
         return PTVAsyncAPIAdapter(token: token, cache: true, debug: true)
     }()
     
-    let token: AccessToken
+    let token: PTVAccessToken
     let debug: Bool
     let decoder: JSONDecoder
+    let logger = Logger(subsystem: "PTVAsyncAPIAdapter", category: "PTV")
     
-    init(token: AccessToken, cache: Bool, debug: Bool) {
+    init(token: PTVAccessToken, cache: Bool, debug: Bool) {
         self.token = token
-        self.useCache = cache
+        self.cache = PTVCache(enabled: cache)
         self.debug = debug
         self.decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         decoder.dateDecodingStrategy = .iso8601
     }
     
-    let useCache: Bool
-    private var cache: [URL: Data] = [:]
-    
-    private func prepare<T: Endpoint>(route: T) -> URL? {
-        guard let url = route.url(token.developerID) else {
-            return nil
-        }
-        
-        if debug {
-            print("Signing URL: \(url)")
-        }
-        guard let keyData = token.key.data(using: .ascii), let urlData = url.data(using: .ascii) else {
-            return nil
-        }
-        
-        let digestLength = Int(CC_SHA1_DIGEST_LENGTH)
-        let algorithm = CCHmacAlgorithm(kCCHmacAlgSHA1)
-        let hashBytes = UnsafeMutablePointer<UInt8>.allocate(capacity: digestLength)
-        defer { hashBytes.deallocate() }
-        
-        urlData.withUnsafeBytes { (ptr) -> Void in
-            keyData.withUnsafeBytes { (keyPtr) -> Void in
-                CCHmac(algorithm, keyPtr, keyData.count, ptr, urlData.count, hashBytes)
-            }
-        }
-        let hmac = Data(bytes: hashBytes, count: digestLength)
-        
-        guard let signed = URL(string: String(format: "%@%@&signature=%@", PTV.API.baseURL, url, hmac.hexEncodedString(options: .upperCase))) else {
-            return nil
-        }
-        
-        return signed
-    }
+    private let cache: PTVCache
     
     func request<T: Endpoint>(endpoint: T) async throws -> T.ResultType  {
-        guard let url = prepare(route: endpoint) else {
-            print("Error signing route")
+        guard let url = endpoint.prepareURL(using: token) else {
+            logger.warning("Error signing route \(endpoint.path)")
             throw PTV.Errors.other
         }
         
-        if let cached = cache[url], let decoded = try? self.decoder.decode(T.ResultType.self, from: cached) {
-            if debug {
-                print("Loading from cache...")
-            }
+        if let cached = await cache.retrieveCache(for: url), let decoded = try? self.decoder.decode(T.ResultType.self, from: cached) {
+            logger.debug("Loading from cache...")
             
             return decoded
         }
         
         do {
             let result = try await URLSession.shared.data(from: url)
-            if self.debug {
-                print("Result from '\(url.absoluteString)': \(String(data: result.0, encoding: .utf8) ?? "empty")")
-            }
+            logger.debug("Result from '\(url.absoluteString)': \(String(data: result.0, encoding: .utf8) ?? "empty")")
             let decoded = try self.decoder.decode(T.ResultType.self, from: result.0)
-            if self.useCache && endpoint.cache {
-                // Only cache if we parsed the data
-                self.cache[url] = result.0
+            if endpoint.cache {
+                await cache.setCache(data: result.0, for: url)
             }
             return decoded
         } catch let error {
+            logger.error("Error loading result from \(url)")
             switch error {
             case let e as URLError:
                 throw PTV.Errors.network(e)

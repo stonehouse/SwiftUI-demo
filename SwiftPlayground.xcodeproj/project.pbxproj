@@ -19,6 +19,9 @@
 		37EB98C2233AC934006E0F65 /* StopsNearMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB98C1233AC934006E0F65 /* StopsNearMeView.swift */; };
 		698CCAFC2888E52D0017B50E /* PTVAsyncAPIAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698CCAFB2888E52D0017B50E /* PTVAsyncAPIAdapter.swift */; };
 		698CCAFE2888EA5B0017B50E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698CCAFD2888EA5B0017B50E /* ViewModel.swift */; };
+		6991FB7F28991E220069FF6F /* Endpoint+prepareURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991FB7E28991E220069FF6F /* Endpoint+prepareURL.swift */; };
+		6991FB81289921040069FF6F /* PTVCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991FB80289921040069FF6F /* PTVCache.swift */; };
+		6991FB832899223A0069FF6F /* PTVAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991FB822899223A0069FF6F /* PTVAccessToken.swift */; };
 		FA0DFFD7231E74EC00CB8B0A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DFFD6231E74EC00CB8B0A /* AppDelegate.swift */; };
 		FA0DFFD9231E74EC00CB8B0A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DFFD8231E74EC00CB8B0A /* SceneDelegate.swift */; };
 		FA0DFFDB231E74EC00CB8B0A /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DFFDA231E74EC00CB8B0A /* RootView.swift */; };
@@ -57,6 +60,9 @@
 		37EB98C1233AC934006E0F65 /* StopsNearMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsNearMeView.swift; sourceTree = "<group>"; };
 		698CCAFB2888E52D0017B50E /* PTVAsyncAPIAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTVAsyncAPIAdapter.swift; sourceTree = "<group>"; };
 		698CCAFD2888EA5B0017B50E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		6991FB7E28991E220069FF6F /* Endpoint+prepareURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Endpoint+prepareURL.swift"; sourceTree = "<group>"; };
+		6991FB80289921040069FF6F /* PTVCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTVCache.swift; sourceTree = "<group>"; };
+		6991FB822899223A0069FF6F /* PTVAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTVAccessToken.swift; sourceTree = "<group>"; };
 		FA0DFFD3231E74EC00CB8B0A /* SwiftPlayground.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftPlayground.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA0DFFD6231E74EC00CB8B0A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA0DFFD8231E74EC00CB8B0A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -209,6 +215,9 @@
 				FA591F9023233F4B0066AD7A /* Endpoint.swift */,
 				FA591F94232342040066AD7A /* PTVFixturesAdapter.swift */,
 				698CCAFB2888E52D0017B50E /* PTVAsyncAPIAdapter.swift */,
+				6991FB7E28991E220069FF6F /* Endpoint+prepareURL.swift */,
+				6991FB80289921040069FF6F /* PTVCache.swift */,
+				6991FB822899223A0069FF6F /* PTVAccessToken.swift */,
 			);
 			path = PTV;
 			sourceTree = "<group>";
@@ -316,6 +325,7 @@
 				378AED3623231F6A0085DFF9 /* RoutesView.swift in Sources */,
 				698CCAFE2888EA5B0017B50E /* ViewModel.swift in Sources */,
 				37EB98AF23399C35006E0F65 /* Search.swift in Sources */,
+				6991FB7F28991E220069FF6F /* Endpoint+prepareURL.swift in Sources */,
 				FA591F9B2323AD370066AD7A /* Departures.swift in Sources */,
 				FA0DFFD9231E74EC00CB8B0A /* SceneDelegate.swift in Sources */,
 				37EB98C0233AC8C1006E0F65 /* MapView.swift in Sources */,
@@ -325,9 +335,11 @@
 				378AED3A232330650085DFF9 /* RouteView.swift in Sources */,
 				378AED3223231E5B0085DFF9 /* Routes.swift in Sources */,
 				FA591F9123233F4B0066AD7A /* Endpoint.swift in Sources */,
+				6991FB832899223A0069FF6F /* PTVAccessToken.swift in Sources */,
 				378AED38232330200085DFF9 /* StopsOnRoute.swift in Sources */,
 				FA0DFFDB231E74EC00CB8B0A /* RootView.swift in Sources */,
 				FA6C70452321B7CE007AA5C7 /* RouteTypes.swift in Sources */,
+				6991FB81289921040069FF6F /* PTVCache.swift in Sources */,
 				378AED3423231EBF0085DFF9 /* RouteTypesView.swift in Sources */,
 				698CCAFC2888E52D0017B50E /* PTVAsyncAPIAdapter.swift in Sources */,
 				FA591F95232342040066AD7A /* PTVFixturesAdapter.swift in Sources */,
