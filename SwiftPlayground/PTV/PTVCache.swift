@@ -16,7 +16,7 @@ actor PTVCache {
         self.enabled = enabled
     }
     
-    func setCache(result: any RootResultType, for url: URL) {
+    func setCache(result: some RootResultType, for url: URL) {
         guard enabled else { return }
         cache[url] = result
     }
