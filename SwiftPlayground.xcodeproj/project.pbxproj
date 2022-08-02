@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -23,6 +23,7 @@
 		6991FB81289921040069FF6F /* PTVCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991FB80289921040069FF6F /* PTVCache.swift */; };
 		6991FB832899223A0069FF6F /* PTVAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991FB822899223A0069FF6F /* PTVAccessToken.swift */; };
 		6991FB85289926600069FF6F /* PTVApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991FB84289926600069FF6F /* PTVApp.swift */; };
+		6991FB9228992C700069FF6F /* AsyncAlgorithms in Frameworks */ = {isa = PBXBuildFile; productRef = 6991FB9128992C700069FF6F /* AsyncAlgorithms */; };
 		FA0DFFDB231E74EC00CB8B0A /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0DFFDA231E74EC00CB8B0A /* RootView.swift */; };
 		FA0DFFDD231E74EE00CB8B0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0DFFDC231E74EE00CB8B0A /* Assets.xcassets */; };
 		FA0DFFE0231E74EE00CB8B0A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA0DFFDF231E74EE00CB8B0A /* Preview Assets.xcassets */; };
@@ -93,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6991FB9228992C700069FF6F /* AsyncAlgorithms in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,9 +149,17 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		6991FB8928992A480069FF6F /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		FA0DFFCA231E74EC00CB8B0A = {
 			isa = PBXGroup;
 			children = (
+				6991FB8928992A480069FF6F /* Packages */,
 				FA6F76CD233B55100067A80C /* README.md */,
 				FA0DFFD5231E74EC00CB8B0A /* SwiftPlayground */,
 				FA0DFFD4231E74EC00CB8B0A /* Products */,
@@ -249,6 +259,7 @@
 			);
 			name = SwiftPlayground;
 			packageProductDependencies = (
+				6991FB9128992C700069FF6F /* AsyncAlgorithms */,
 			);
 			productName = SwiftPlayground;
 			productReference = FA0DFFD3231E74EC00CB8B0A /* SwiftPlayground.app */;
@@ -278,6 +289,9 @@
 				Base,
 			);
 			mainGroup = FA0DFFCA231E74EC00CB8B0A;
+			packageReferences = (
+				6991FB9028992C700069FF6F /* XCRemoteSwiftPackageReference "swift-async-algorithms" */,
+			);
 			productRefGroup = FA0DFFD4231E74EC00CB8B0A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -534,6 +548,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		6991FB9028992C700069FF6F /* XCRemoteSwiftPackageReference "swift-async-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-async-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		6991FB9128992C700069FF6F /* AsyncAlgorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 6991FB9028992C700069FF6F /* XCRemoteSwiftPackageReference "swift-async-algorithms" */;
+			productName = AsyncAlgorithms;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = FA0DFFCB231E74EC00CB8B0A /* Project object */;
 }

@@ -41,8 +41,8 @@ actor PTVAsyncAPIAdapter: DataAdapter {
         
         do {
             let result = try await URLSession.shared.data(from: url)
-            logger.debug("Result from '\(url.absoluteString)': \(String(data: result.0, encoding: .utf8) ?? "empty")")
             let decoded = try self.decoder.decode(T.ResultType.self, from: result.0)
+            logger.debug("Request to \(url.path()) was successful")
             if endpoint.cache {
                 await cache.setCache(result: decoded, for: url)
             }

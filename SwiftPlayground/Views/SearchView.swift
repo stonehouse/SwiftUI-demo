@@ -9,37 +9,18 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State var searchTerm: String = ""
-    @ObservedObject var model: Search
-    
-    init(model: Search = Search()) {
-        self.model = model
-    }
+    @ObservedObject var model: Search = Search()
     
     var body: some View {
-        VStack {
-            HStack {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                    TextField("Search", text: $searchTerm, onEditingChanged: { _ in }, onCommit: {
-                        self.model.update(search: self.searchTerm)
-                    })
-                }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
-            }
-            .background(Color(.secondarySystemFill))
-            .clipShape(Capsule())
-            .overlay(Capsule().stroke(Color.gray, lineWidth: 2))
-            .padding(.horizontal, 10)
-            List {
-                 ForEach(self.model.routes) { result in
-                     NavigationLink(destination: RouteView(route: result), label: {
-                         Text("\(result.routeName)")
-                     })
-                 }
+        List {
+            ForEach(self.model.routes) { result in
+                NavigationLink(destination: RouteView(route: result), label: {
+                    Text("\(result.routeName)")
+                })
             }
         }
+        .searchable(text: $model.searchTerm)
+        .navigationTitle("Search")
         .task { await model.bind() }
     }
 }
