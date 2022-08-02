@@ -9,19 +9,19 @@
 import Foundation
 
 actor PTVCache {
-    private var cache: [URL: Data] = [:]
+    private var cache: [URL: any RootResultType] = [:]
     private let enabled: Bool
     
     init(enabled: Bool) {
         self.enabled = enabled
     }
     
-    func setCache(data: Data, for url: URL) {
+    func setCache(result: any RootResultType, for url: URL) {
         guard enabled else { return }
-        cache[url] = data
+        cache[url] = result
     }
     
-    func retrieveCache(for url: URL) -> Data? {
+    func retrieveCache(for url: URL) -> (any RootResultType)? {
         return cache[url]
     }
 }

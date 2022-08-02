@@ -12,24 +12,21 @@ import os
 actor PTVAsyncAPIAdapter: DataAdapter {
     static let `default`: PTVAsyncAPIAdapter = {
         let token = PTVAccessToken(key: "27df7af0-a2e8-4dc9-805e-755035b5492d", developerID: 3001313)
-        return PTVAsyncAPIAdapter(token: token, cache: true, debug: true)
+        return PTVAsyncAPIAdapter(token: token, cache: true)
     }()
     
     let token: PTVAccessToken
-    let debug: Bool
     let decoder: JSONDecoder
     let logger = Logger(subsystem: "PTVAsyncAPIAdapter", category: "PTV")
+    private let cache: PTVCache
     
-    init(token: PTVAccessToken, cache: Bool, debug: Bool) {
+    init(token: PTVAccessToken, cache: Bool) {
         self.token = token
         self.cache = PTVCache(enabled: cache)
-        self.debug = debug
         self.decoder = JSONDecoder()
         decoder.keyDecodingStrategy = .convertFromSnakeCase
         decoder.dateDecodingStrategy = .iso8601
     }
-    
-    private let cache: PTVCache
     
     func request<T: Endpoint>(endpoint: T) async throws -> T.ResultType  {
         guard let url = endpoint.prepareURL(using: token) else {
@@ -37,9 +34,8 @@ actor PTVAsyncAPIAdapter: DataAdapter {
             throw PTV.Errors.other
         }
         
-        if let cached = await cache.retrieveCache(for: url), let decoded = try? self.decoder.decode(T.ResultType.self, from: cached) {
-            logger.debug("Loading from cache...")
-            
+        if let cached = await cache.retrieveCache(for: url), let decoded = cached as? T.ResultType {
+            logger.debug("Loading \(endpoint.path) from cache...")
             return decoded
         }
         
@@ -48,7 +44,7 @@ actor PTVAsyncAPIAdapter: DataAdapter {
             logger.debug("Result from '\(url.absoluteString)': \(String(data: result.0, encoding: .utf8) ?? "empty")")
             let decoded = try self.decoder.decode(T.ResultType.self, from: result.0)
             if endpoint.cache {
-                await cache.setCache(data: result.0, for: url)
+                await cache.setCache(result: decoded, for: url)
             }
             return decoded
         } catch let error {
