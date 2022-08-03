@@ -16,15 +16,6 @@ class Search: ObservableObject {
     enum Result: Identifiable {
         case stop(Stop), route(Route)
         
-        var name: String {
-            switch self {
-            case .stop(let stop):
-                return stop.stopName
-            case .route(let route):
-                return route.routeName
-            }
-        }
-        
         var id: Int {
             self.name.hashValue
         }

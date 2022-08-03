@@ -13,15 +13,36 @@ struct SearchView: View {
     
     var body: some View {
         List {
-            ForEach(self.model.routes) { result in
-                NavigationLink(destination: RouteView(route: result), label: {
-                    Text("\(result.routeName)")
+            ForEach(self.model.results) { result in
+                NavigationLink(destination: result.destination, label: {
+                    Text("\(result.name)")
                 })
             }
         }
         .searchable(text: $model.searchTerm)
         .navigationTitle("Search")
         .task { await model.bind() }
+    }
+}
+
+extension Search.Result {
+    @ViewBuilder
+    var destination: some View {
+        switch self {
+        case .stop(let stop):
+            DeparturesView(stop: stop)
+        case .route(let route):
+            RouteView(route: route)
+        }
+    }
+    
+    var name: String {
+        switch self {
+        case .stop(let stop):
+            return stop.stopName
+        case .route(let route):
+            return route.routeName
+        }
     }
 }
 

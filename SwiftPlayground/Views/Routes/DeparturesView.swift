@@ -11,12 +11,8 @@ import SwiftUI
 struct DeparturesView: View {
     @ObservedObject var model: Departures
     
-    func direction(for departure: PTV.Models.Departure) -> PTV.Models.Direction? {
-        model.directions.first(where: { $0.directionId == departure.directionId })
-    }
-    
-    init(stop: PTV.Models.Stop, route: PTV.Models.Route, directions: [PTV.Models.Direction]) {
-        self.model = Departures(stop: stop, route: route, directions: directions)
+    init(stop: PTV.Models.Stop, route: PTV.Models.Route? = nil) {
+        self.model = Departures(stop: stop, route: route)
     }
     
     init(model: Departures) {
@@ -29,7 +25,7 @@ struct DeparturesView: View {
             List(model.departuresSoon) { info in
                 VStack {
                     HStack {
-                        Text("\(self.direction(for: info.departure)?.directionName ?? "") ").bold()
+                        Text("\(info.direction) ").bold()
                         Spacer()
                         Text(info.platform).foregroundColor(.gray)
                     }

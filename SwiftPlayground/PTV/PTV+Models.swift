@@ -86,6 +86,7 @@ extension PTV {
             let stopLatitude: Double
             let stopLongitude: Double
             let stopSequence: Int
+            let routes: [Route]?
         }
 
         struct Departures: RootResultType {

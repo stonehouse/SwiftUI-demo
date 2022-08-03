@@ -18,6 +18,7 @@ class Departures: ViewModel {
         }
         let departure: Model
         let time: String
+        let direction: String
         var platform: String {
             if let platform = departure.platformNumber {
                 return "Platform \(platform)"
@@ -26,14 +27,15 @@ class Departures: ViewModel {
         }
     }
     
-    let formatter: DateFormatter
-    let endpoint: PTV.API.DeparturesAtStop
     let stop: PTV.Models.Stop
-    let route: PTV.Models.Route
-    let directions: [PTV.Models.Direction]
-    let now: Date
-    let filterOld: Bool
     @Published var departures: [Model] = []
+    
+    private let formatter: DateFormatter
+    private let routes: [PTV.Models.Route]
+    var directions: [PTV.Models.Direction] = []
+    private let now: Date
+    private let filterOld: Bool
+    
     var departuresSoon: [DepartureInfo] {
         departures.compactMap {
             let distance = ($0.estimatedDepartureUtc ?? $0.scheduledDepartureUtc).distance(to: now)
@@ -41,25 +43,42 @@ class Departures: ViewModel {
                 return nil
             }
             
-            return DepartureInfo(departure: $0, time: distance.string)
+            return DepartureInfo(departure: $0, time: distance.string, direction: direction(for: $0)?.directionName ?? "")
         }
     }
 
-    init(stop: PTV.Models.Stop, route: PTV.Models.Route, directions: [PTV.Models.Direction], now: Date = Date(), filterOld: Bool = true) {
+    init(stop: PTV.Models.Stop, route: PTV.Models.Route?, now: Date = Date(), filterOld: Bool = true) {
         self.stop = stop
-        self.route = route
-        self.directions = directions
+        if let route = route {
+            self.routes = [route]
+        } else {
+            self.routes = stop.routes ?? []
+        }
         self.now = now
         self.filterOld = filterOld
-        self.endpoint = PTV.API.DeparturesAtStop(stop: stop, route: route)
         self.formatter = DateFormatter()
+    }
+    
+    private func direction(for departure: PTV.Models.Departure) -> PTV.Models.Direction? {
+        directions.first(where: { $0.directionId == departure.directionId })
     }
     
     @MainActor
     func bind() async {
         do {
+            for route in routes {
+                directions += try await ptv.request(endpoint: PTV.API.Directions(route: route)).directions
+            }
+
+            let endpoint: PTV.API.DeparturesAtStop
+            if routes.count == 1 {
+                endpoint = PTV.API.DeparturesAtStop(stop: stop, route: routes[0])
+            } else {
+                endpoint = PTV.API.DeparturesAtStop(stop: stop)
+            }
+            
             let result = try await ptv.request(endpoint: endpoint)
-            self.departures = result.departures.sorted(by: { $0.id > $1.id })
+            departures = result.departures.sorted(by: { $0.id > $1.id })
         } catch _ {
             
         }
