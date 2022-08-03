@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct SearchView: View {
-    @ObservedObject var model: Search = Search()
+    @StateObject var model: Search = Search()
     
     var body: some View {
         LoadingView(loading: $model.loading, {

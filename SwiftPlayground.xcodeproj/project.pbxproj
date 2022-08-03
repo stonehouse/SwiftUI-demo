@@ -168,6 +168,16 @@
 			path = Helpers;
 			sourceTree = "<group>";
 		};
+		6941286A289B3C210036193D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FA6C703D2321B2A9007AA5C7 /* Data+HexEncodedString.swift */,
+				6991FB7E28991E220069FF6F /* Endpoint+prepareURL.swift */,
+				69412861289A6B000036193D /* PTV+Models+Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		6991FB8928992A480069FF6F /* Packages */ = {
 			isa = PBXGroup;
 			children = (
@@ -218,6 +228,7 @@
 		FA591F8923233A9D0066AD7A /* Fixtures */ = {
 			isa = PBXGroup;
 			children = (
+				FA591F94232342040066AD7A /* PTVFixturesAdapter.swift */,
 				FA591F8A23233AB30066AD7A /* route_types.json */,
 				FA591F8C23233AE40066AD7A /* routes.json */,
 				FA591F8E23233B2D0066AD7A /* stops_route.json */,
@@ -233,16 +244,13 @@
 		FA6C70382321B236007AA5C7 /* PTV */ = {
 			isa = PBXGroup;
 			children = (
+				6941286A289B3C210036193D /* Helpers */,
 				FA591F8923233A9D0066AD7A /* Fixtures */,
 				FA0DFFEA231E78A200CB8B0A /* PTV.swift */,
 				FA6C70392321B24A007AA5C7 /* PTV+API.swift */,
 				FA6C703B2321B25F007AA5C7 /* PTV+Models.swift */,
-				69412861289A6B000036193D /* PTV+Models+Extensions.swift */,
-				FA6C703D2321B2A9007AA5C7 /* Data+HexEncodedString.swift */,
 				FA591F9023233F4B0066AD7A /* Endpoint.swift */,
-				FA591F94232342040066AD7A /* PTVFixturesAdapter.swift */,
 				698CCAFB2888E52D0017B50E /* PTVAsyncAPIAdapter.swift */,
-				6991FB7E28991E220069FF6F /* Endpoint+prepareURL.swift */,
 				6991FB80289921040069FF6F /* PTVCache.swift */,
 				6991FB822899223A0069FF6F /* PTVAccessToken.swift */,
 			);
