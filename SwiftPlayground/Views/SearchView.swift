@@ -12,21 +12,23 @@ struct SearchView: View {
     @ObservedObject var model: Search = Search()
     
     var body: some View {
-        List {
-            ForEach(self.model.results) { result in
-                NavigationLink(destination: result.destination, label: {
-                    switch result {
-                    case .stop(let stop):
-                        Text("🛑 \(stop.stopName)")
-                    case .route(let route):
-                        HStack {
-                            TransportIconView(type: route.type)
-                            Text("\(route.routeName)")
+        LoadingView(loading: $model.loading, {
+            List {
+                ForEach(self.model.results) { result in
+                    NavigationLink(destination: result.destination, label: {
+                        switch result {
+                        case .stop(let stop):
+                            Text("🛑 \(stop.stopName)")
+                        case .route(let route):
+                            HStack {
+                                TransportIconView(type: route.transportType)
+                                Text("\(route.routeName)")
+                            }
                         }
-                    }
-                })
+                    })
+                }
             }
-        }
+        })
         .searchable(text: $model.searchTerm)
         .navigationTitle("Search")
         .task { await model.bind() }
@@ -40,7 +42,7 @@ extension Search.Result {
         case .stop(let stop):
             DeparturesView(stop: stop)
         case .route(let route):
-            RouteView(route: route)
+            StopsOnRouteView(route: route)
         }
     }
 }

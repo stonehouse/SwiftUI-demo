@@ -49,13 +49,19 @@ extension PTV.Models.RouteTypes {
 }
 
 extension PTV.Models.RouteType {
-    var type: TransportTypes {
+    var transportType: TransportTypes {
         TransportTypes.from(id: id)
     }
 }
 
 extension PTV.Models.Route {
-    var type: TransportTypes {
+    var transportType: TransportTypes {
+        TransportTypes.from(id: routeType)
+    }
+}
+
+extension PTV.Models.Stop {
+    var transportType: TransportTypes {
         TransportTypes.from(id: routeType)
     }
 }

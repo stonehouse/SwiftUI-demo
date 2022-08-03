@@ -20,22 +20,28 @@ struct DeparturesView: View {
     }
     
     var body: some View {
-        VStack {
-            Text("\(model.stop.stopName)").font(.title)
-            List(model.departuresSoon) { info in
-                VStack {
-                    HStack {
-                        Text("\(info.direction) ").bold()
-                        Spacer()
-                        Text(info.platform).foregroundColor(.gray)
-                    }
-                    HStack {
-                        Text("Departing in \(info.time)")
-                        Spacer()
+        LoadingView(loading: $model.loading, {
+            VStack {
+                HStack {
+                    TransportIconView(type: model.stop.transportType, size: .large)
+                    Text("\(model.stop.stopName)")
+                        .font(.title)
+                }
+                List(model.departuresSoon) { info in
+                    VStack {
+                        HStack {
+                            Text("\(info.direction) ").bold()
+                            Spacer()
+                            Text(info.platform).foregroundColor(.gray)
+                        }
+                        HStack {
+                            Text("Departing in \(info.time)")
+                            Spacer()
+                        }
                     }
                 }
             }
-        }
+        })
         .navigationBarTitle("Departures")
         .task { await model.bind() }
     }

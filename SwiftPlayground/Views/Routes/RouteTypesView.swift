@@ -19,7 +19,7 @@ struct RouteTypesView: View {
         List(model.routeTypes) { routeType in
             NavigationLink(destination: RoutesView(routeTypes: [routeType]).navigationBarTitle(routeType.routeTypeName)) {
                 HStack {
-                    TransportIconView(type: routeType.type)
+                    TransportIconView(type: routeType.transportType)
                     Text("\(routeType.routeTypeName)")
                 }
             }

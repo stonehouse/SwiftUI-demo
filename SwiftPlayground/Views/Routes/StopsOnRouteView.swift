@@ -1,5 +1,5 @@
 //
-//  RouteView.swift
+//  StopsOnRouteView.swift
 //  SwiftPlayground
 //
 //  Created by Alexander Stonehouse on 7/9/19.
@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct RouteView: View {
+struct StopsOnRouteView: View {
     var route: PTV.Models.Route
     @ObservedObject var model: StopsOnRoute
     
@@ -19,7 +19,7 @@ struct RouteView: View {
     
     var body: some View {
         VStack {
-            Text("\(route.routeName)").font(.title)
+            TransportIconView(type: route.transportType, size: .large)
             HStack {
                 Text("Status:").bold()
                 Text(route.routeServiceStatus.description)
@@ -30,13 +30,14 @@ struct RouteView: View {
                 }
             }
         }
+        .navigationTitle(route.routeName)
         .task { await model.bind() }
     }
 }
 
 struct RouteView_Preview: PreviewProvider {
     static var previews: some View {
-        RouteView(route: .fixture, stops: .fixture)
+        StopsOnRouteView(route: .fixture, stops: .fixture)
     }
 }
 

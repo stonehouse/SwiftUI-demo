@@ -29,6 +29,7 @@ class Departures: ViewModel {
     
     let stop: PTV.Models.Stop
     @Published var departures: [Model] = []
+    @Published var loading = false
     
     private let formatter: DateFormatter
     private let routes: [PTV.Models.Route]
@@ -66,6 +67,7 @@ class Departures: ViewModel {
     @MainActor
     func bind() async {
         do {
+            loading = true
             for route in routes {
                 directions += try await ptv.request(endpoint: PTV.API.Directions(route: route)).directions
             }
@@ -79,6 +81,7 @@ class Departures: ViewModel {
             
             let result = try await ptv.request(endpoint: endpoint)
             departures = result.departures.sorted(by: { $0.id > $1.id })
+            loading = false
         } catch _ {
             
         }

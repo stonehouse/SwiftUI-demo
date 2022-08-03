@@ -34,6 +34,7 @@ class Search: ObservableObject {
     @Published var routes: [Route] = []
     @Published var results: [Result] = []
     @Published var searchTerm: String = ""
+    @Published var loading = false
 
     /// For fixtures
     init(search: PTV.Models.Search = .init()) {
@@ -56,8 +57,10 @@ class Search: ObservableObject {
             for try await searchTerm in $searchTerm.values
                 .debounce(for: .milliseconds(500))
                 .filter({ $0.count > 2 }) {
+                loading = true
                 let searchResult = try await ptv.request(endpoint: PTV.API.Search(searchTerm: searchTerm))
                 self.update(value: searchResult)
+                loading = false
             }
         } catch _ {
             

@@ -9,20 +9,36 @@
 import SwiftUI
 
 struct TransportIconView: View {
+    enum Size {
+        case small, large
+    }
+    
     let type: TransportTypes
+    var size: Size = .small
     
     var body: some View {
         switch type {
         case .train:
-            Text("🚈")
+            Text("🚈").font(for: size)
         case .tram:
-            Text("🚃")
+            Text("🚃").font(for: size)
         case .bus:
-            Text("🚌")
+            Text("🚌").font(for: size)
         case .vline:
-            Text("🚂")
+            Text("🚂").font(for: size)
         case .nightbus:
-            Text("😴")
+            Text("😴").font(for: size)
+        }
+    }
+}
+
+private extension Text {
+    func font(for size: TransportIconView.Size) -> some View {
+        switch size {
+        case .small:
+            return self
+        case .large:
+            return font(.largeTitle)
         }
     }
 }
