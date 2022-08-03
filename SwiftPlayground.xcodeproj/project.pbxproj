@@ -17,6 +17,8 @@
 		37EB98BA233ABFFF006E0F65 /* search.json in Resources */ = {isa = PBXBuildFile; fileRef = 37EB98B9233ABFFF006E0F65 /* search.json */; };
 		37EB98C0233AC8C1006E0F65 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB98BF233AC8C1006E0F65 /* MapView.swift */; };
 		37EB98C2233AC934006E0F65 /* StopsNearMeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 37EB98C1233AC934006E0F65 /* StopsNearMeView.swift */; };
+		69412862289A6B000036193D /* PTV+Models+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69412861289A6B000036193D /* PTV+Models+Extensions.swift */; };
+		69412865289A6F740036193D /* TransportIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69412864289A6F740036193D /* TransportIconView.swift */; };
 		698CCAFC2888E52D0017B50E /* PTVAsyncAPIAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698CCAFB2888E52D0017B50E /* PTVAsyncAPIAdapter.swift */; };
 		698CCAFE2888EA5B0017B50E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698CCAFD2888EA5B0017B50E /* ViewModel.swift */; };
 		6991FB7F28991E220069FF6F /* Endpoint+prepareURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991FB7E28991E220069FF6F /* Endpoint+prepareURL.swift */; };
@@ -58,6 +60,8 @@
 		37EB98B9233ABFFF006E0F65 /* search.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = search.json; sourceTree = "<group>"; };
 		37EB98BF233AC8C1006E0F65 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		37EB98C1233AC934006E0F65 /* StopsNearMeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopsNearMeView.swift; sourceTree = "<group>"; };
+		69412861289A6B000036193D /* PTV+Models+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PTV+Models+Extensions.swift"; sourceTree = "<group>"; };
+		69412864289A6F740036193D /* TransportIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportIconView.swift; sourceTree = "<group>"; };
 		698CCAFB2888E52D0017B50E /* PTVAsyncAPIAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTVAsyncAPIAdapter.swift; sourceTree = "<group>"; };
 		698CCAFD2888EA5B0017B50E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		6991FB7E28991E220069FF6F /* Endpoint+prepareURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Endpoint+prepareURL.swift"; sourceTree = "<group>"; };
@@ -107,6 +111,7 @@
 				FA0DFFDA231E74EC00CB8B0A /* RootView.swift */,
 				37EB98B72339BDE1006E0F65 /* SearchView.swift */,
 				44B3466A233B1B9C00108B06 /* Routes */,
+				69412863289A6F640036193D /* Helpers */,
 				37EB98BE233AC8B7006E0F65 /* Map */,
 			);
 			path = Views;
@@ -147,6 +152,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		69412863289A6F640036193D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				69412864289A6F740036193D /* TransportIconView.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		6991FB8928992A480069FF6F /* Packages */ = {
@@ -218,6 +231,7 @@
 				FA0DFFEA231E78A200CB8B0A /* PTV.swift */,
 				FA6C70392321B24A007AA5C7 /* PTV+API.swift */,
 				FA6C703B2321B25F007AA5C7 /* PTV+Models.swift */,
+				69412861289A6B000036193D /* PTV+Models+Extensions.swift */,
 				FA6C703D2321B2A9007AA5C7 /* Data+HexEncodedString.swift */,
 				FA591F9023233F4B0066AD7A /* Endpoint.swift */,
 				FA591F94232342040066AD7A /* PTVFixturesAdapter.swift */,
@@ -328,7 +342,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				69412862289A6B000036193D /* PTV+Models+Extensions.swift in Sources */,
 				FA6C703A2321B24A007AA5C7 /* PTV+API.swift in Sources */,
+				69412865289A6F740036193D /* TransportIconView.swift in Sources */,
 				FA6C703C2321B25F007AA5C7 /* PTV+Models.swift in Sources */,
 				37EB98C2233AC934006E0F65 /* StopsNearMeView.swift in Sources */,
 				FA6C703E2321B2A9007AA5C7 /* Data+HexEncodedString.swift in Sources */,

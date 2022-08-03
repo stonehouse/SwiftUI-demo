@@ -39,7 +39,7 @@ class Departures: ViewModel {
     var departuresSoon: [DepartureInfo] {
         departures.compactMap {
             let distance = ($0.estimatedDepartureUtc ?? $0.scheduledDepartureUtc).distance(to: now)
-            guard !filterOld || distance > 0 else {
+            guard !filterOld || (distance > 0 && distance < 3600) else {
                 return nil
             }
             

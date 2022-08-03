@@ -15,7 +15,15 @@ struct SearchView: View {
         List {
             ForEach(self.model.results) { result in
                 NavigationLink(destination: result.destination, label: {
-                    Text("\(result.name)")
+                    switch result {
+                    case .stop(let stop):
+                        Text("🛑 \(stop.stopName)")
+                    case .route(let route):
+                        HStack {
+                            TransportIconView(type: route.type)
+                            Text("\(route.routeName)")
+                        }
+                    }
                 })
             }
         }
@@ -33,15 +41,6 @@ extension Search.Result {
             DeparturesView(stop: stop)
         case .route(let route):
             RouteView(route: route)
-        }
-    }
-    
-    var name: String {
-        switch self {
-        case .stop(let stop):
-            return stop.stopName
-        case .route(let route):
-            return route.routeName
         }
     }
 }
