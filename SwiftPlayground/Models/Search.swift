@@ -7,10 +7,9 @@
 //
 
 import Foundation
-import Combine
+import AsyncAlgorithms
 
-class Search: EndpointLoader {
-    typealias EndpointType = PTV.API.Search
+class Search: ObservableObject {
     typealias Stop = PTV.Models.Stop
     typealias Route = PTV.Models.Route
     
@@ -31,41 +30,40 @@ class Search: EndpointLoader {
         }
     }
     
-    let endpoint = EndpointType(searchTerm: "") // Not used
-    var cancellables: [AnyCancellable] = []
     @Published var stops: [Stop] = []
     @Published var routes: [Route] = []
     @Published var results: [Result] = []
-    var cancellable: AnyCancellable?
-    private let subject = PassthroughSubject<String, Error>()
+    @Published var searchTerm: String = ""
+    @Published var loading = false
 
     /// For fixtures
-    init(search: EndpointType.ResultType) {
-        receive(value: search)
+    init(search: PTV.Models.Search = .init()) {
+        update(value: search)
     }
     
-    init() {
-        cancellable = subject
-            .mapError({ _ in
-                PTV.Errors.other
-            })
-            .flatMap({ searchTerm in
-                ptv.request(route: EndpointType(searchTerm: searchTerm))
-            })
-            .receive(on: RunLoop.main)
-            .sink(receiveCompletion: { _ in }, receiveValue: { [unowned self] searchResult in
-                self.receive(value: searchResult)
-            })
-    }
-    
-    func update(search: String) {
-        subject.send(search)
-    }
-    
-    func receive(value: EndpointType.ResultType) {
+    private func update(value: PTV.Models.Search) {
         stops = value.stops
         routes = value.routes
         results = (value.stops.map { Result.stop($0) } + value.routes.map { Result.route($0) })
                         .sorted(by: { $0.name < $1.name })
+    }
+    
+    @MainActor
+    func bind() async {
+        // Clear results
+        update(value: .init())
+        
+        do {
+            for try await searchTerm in $searchTerm.values
+                .debounce(for: .milliseconds(500))
+                .filter({ $0.count > 2 }) {
+                loading = true
+                let searchResult = try await ptv.request(endpoint: PTV.API.Search(searchTerm: searchTerm))
+                self.update(value: searchResult)
+                loading = false
+            }
+        } catch _ {
+            
+        }
     }
 }

@@ -7,28 +7,25 @@
 //
 
 import Foundation
-import Combine
 
-class StopsOnRoute: EndpointLoader {
-    typealias EndpointType = PTV.API.StopsOnRoute
+class StopsOnRoute: ViewModel {
     typealias Model = PTV.Models.Stop
     
-    var endpoint: EndpointType
-    var cancellables: [AnyCancellable] = []
     @Published var stops: [Model] = []
-    @Published var directions: [PTV.Models.Direction] = []
-    let route: PTV.Models.Route
+    private let route: PTV.Models.Route
 
     init(route: PTV.Models.Route) {
         self.route = route
-        self.endpoint = EndpointType(route: route)
-        load(PTV.API.Directions(route: route)) { value in
-            self.directions = value.directions
-        }
     }
     
-    func receive(value: EndpointType.ResultType) {
-        self.stops = value.stops
+    @MainActor
+    func bind() async {
+        do {
+            let stopsResult = try await ptv.request(endpoint: PTV.API.StopsOnRoute(route: route))
+            self.stops = stopsResult.stops
+        } catch _ {
+            
+        }
     }
 }
 

@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Combine
 
 private let fixturesAdapter = PTVFixturesAdapter()
 extension PTV {
@@ -35,8 +34,8 @@ private func loadFixture<ResultType: Codable>(_ name: String) -> ResultType {
 }
 
 class PTVFixturesAdapter: DataAdapter {
-    func request<T>(endpoint: T) -> AnyPublisher<T.ResultType, PTV.Errors> where T : Endpoint {
-        AnyPublisher(Just(fixture(for: endpoint)).mapError({ _ in PTV.Errors.other }))
+    func request<T: Endpoint>(endpoint: T) async -> T.ResultType {
+        fixture(for: endpoint)
     }
     
     func fixture<T: Endpoint>(for route: T) -> T.ResultType {
@@ -61,7 +60,7 @@ class PTVFixturesAdapter: DataAdapter {
 extension RouteTypes {
     static var fixture: RouteTypes {
         let fixture = RouteTypes()
-        fixture.routeTypes = fixturesAdapter.fixture(for: fixture.endpoint).routeTypes
+        fixture.routeTypes = fixturesAdapter.fixture(for: PTV.API.RouteTypes()).routeTypes
         return fixture
     }
 }
@@ -69,7 +68,7 @@ extension RouteTypes {
 extension Routes {
     static var fixture: Routes {
         let fixture = Routes(routeTypes: [])
-        fixture.routes = fixturesAdapter.fixture(for: fixture.endpoint).routes
+        fixture.routes = fixturesAdapter.fixture(for: PTV.API.Routes(routeTypes: [])).routes
         return fixture
     }
 }
@@ -83,7 +82,7 @@ extension PTV.Models.Route {
 extension StopsOnRoute {
     static var fixture: StopsOnRoute {
         let fixture = StopsOnRoute(route: .fixture)
-        fixture.stops = fixturesAdapter.fixture(for: fixture.endpoint).stops
+        fixture.stops = fixturesAdapter.fixture(for: PTV.API.StopsOnRoute(route: .fixture)).stops
         return fixture
     }
 }
@@ -103,8 +102,9 @@ extension PTV.Models.Directions {
 extension Departures {
     static var fixture: Departures {
         let now = Date(timeIntervalSince1970: 1567778879)
-        let fixture = Departures(stop: .fixture, route: .fixture, directions: PTV.Models.Directions.fixture.directions, now: now, filterOld: false)
-        fixture.departures = fixturesAdapter.fixture(for: fixture.endpoint).departures
+        let fixture = Departures(stop: .fixture, route: .fixture, now: now, filterOld: false)
+        fixture.departures = fixturesAdapter.fixture(for: PTV.API.DeparturesAtStop(stop: .fixture, route: .fixture)).departures
+        fixture.directions = PTV.Models.Directions.fixture.directions
         return fixture
     }
 }

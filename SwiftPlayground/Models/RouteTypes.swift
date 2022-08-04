@@ -6,19 +6,20 @@
 //  Copyright © 2019 alex. All rights reserved.
 //
 
-import Foundation
-import Combine
 import SwiftUI
 
-class RouteTypes: EndpointLoader {
-    typealias EndpointType = PTV.API.RouteTypes
+class RouteTypes: ViewModel {
     typealias Model = PTV.Models.RouteType
-    
-    let endpoint = EndpointType()
-    var cancellables: [AnyCancellable] = []
+
     @Published var routeTypes: [Model] = []
     
-    func receive(value: EndpointType.ResultType) {
-        self.routeTypes = value.routeTypes
+    @MainActor
+    func bind() async {
+        do {
+            let value = try await ptv.request(endpoint: PTV.API.RouteTypes())
+            self.routeTypes = value.routeTypes
+        } catch _ {
+            
+        }
     }
 }

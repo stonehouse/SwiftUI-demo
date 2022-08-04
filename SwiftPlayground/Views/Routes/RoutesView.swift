@@ -21,14 +21,11 @@ struct RoutesView: View {
     
     var body: some View {
         List(model.routes) { route in
-            NavigationLink(destination: RouteView(route: route)) {
+            NavigationLink(destination: StopsOnRouteView(route: route)) {
                 Text(route.routeName)
             }
-        }.onAppear(perform: appear)
-    }
-    
-    func appear() {
-        model.load()
+        }
+        .task { await model.bind() }
     }
 }
 

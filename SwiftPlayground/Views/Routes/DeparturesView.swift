@@ -11,12 +11,8 @@ import SwiftUI
 struct DeparturesView: View {
     @ObservedObject var model: Departures
     
-    func direction(for departure: PTV.Models.Departure) -> PTV.Models.Direction? {
-        model.directions.first(where: { $0.directionId == departure.directionId })
-    }
-    
-    init(stop: PTV.Models.Stop, route: PTV.Models.Route, directions: [PTV.Models.Direction]) {
-        self.model = Departures(stop: stop, route: route, directions: directions)
+    init(stop: PTV.Models.Stop, route: PTV.Models.Route? = nil) {
+        self.model = Departures(stop: stop, route: route)
     }
     
     init(model: Departures) {
@@ -24,29 +20,30 @@ struct DeparturesView: View {
     }
     
     var body: some View {
-        VStack {
-            Text("\(model.stop.stopName)").font(.title)
-            List(model.departuresSoon) { info in
-                VStack {
-                    HStack {
-                        Text("\(self.direction(for: info.departure)?.directionName ?? "") ").bold()
-                        Spacer()
-                        Text(info.platform).foregroundColor(.gray)
-                    }
-                    HStack {
-                        Text("Departing in \(info.time)")
-                        Spacer()
+        LoadingView(loading: $model.loading, {
+            VStack {
+                HStack {
+                    TransportIconView(type: model.stop.transportType, size: .large)
+                    Text("\(model.stop.stopName)")
+                        .font(.title)
+                }
+                List(model.departuresSoon) { info in
+                    VStack {
+                        HStack {
+                            Text("\(info.direction) ").bold()
+                            Spacer()
+                            Text(info.platform).foregroundColor(.gray)
+                        }
+                        HStack {
+                            Text("Departing in \(info.time)")
+                            Spacer()
+                        }
                     }
                 }
             }
-        }
-        .navigationBarTitle("Departures").onAppear(perform: appear)
-    }
-    
-    func appear() {
-        if model.departures.count == 0 {
-            model.load()
-        }
+        })
+        .navigationBarTitle("Departures")
+        .task { await model.bind() }
     }
 }
 

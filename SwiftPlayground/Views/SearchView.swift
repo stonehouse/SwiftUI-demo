@@ -9,41 +9,41 @@
 import SwiftUI
 
 struct SearchView: View {
-    @State var searchTerm: String = ""
-    @ObservedObject var model: Search
-    
-    init(model: Search = Search()) {
-        self.model = model
-    }
+    @StateObject var model: Search = Search()
     
     var body: some View {
-        VStack {
-            HStack {
-                HStack {
-                    Image(systemName: "magnifyingglass")
-                    TextField("Search", text: $searchTerm, onEditingChanged: { _ in }, onCommit: {
-                        self.model.update(search: self.searchTerm)
+        LoadingView(loading: $model.loading, {
+            List {
+                ForEach(self.model.results) { result in
+                    NavigationLink(destination: result.destination, label: {
+                        switch result {
+                        case .stop(let stop):
+                            Text("🛑 \(stop.stopName)")
+                        case .route(let route):
+                            HStack {
+                                TransportIconView(type: route.transportType)
+                                Text("\(route.routeName)")
+                            }
+                        }
                     })
                 }
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
             }
-            .background(Color(.secondarySystemFill))
-            .clipShape(Capsule())
-            .overlay(Capsule().stroke(Color.gray, lineWidth: 2))
-            .padding(.horizontal, 10)
-            List {
-                 ForEach(self.model.routes) { result in
-                     NavigationLink(destination: RouteView(route: result), label: {
-                         Text("\(result.routeName)")
-                     })
-                 }
-            }
-        }.onAppear(perform: appear)
+        })
+        .searchable(text: $model.searchTerm)
+        .navigationTitle("Search")
+        .task { await model.bind() }
     }
-    
-    func appear() {
-        
+}
+
+extension Search.Result {
+    @ViewBuilder
+    var destination: some View {
+        switch self {
+        case .stop(let stop):
+            DeparturesView(stop: stop)
+        case .route(let route):
+            StopsOnRouteView(route: route)
+        }
     }
 }
 

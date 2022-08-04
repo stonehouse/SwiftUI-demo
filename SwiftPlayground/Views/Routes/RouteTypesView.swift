@@ -18,14 +18,13 @@ struct RouteTypesView: View {
     var body: some View {
         List(model.routeTypes) { routeType in
             NavigationLink(destination: RoutesView(routeTypes: [routeType]).navigationBarTitle(routeType.routeTypeName)) {
-                Text(routeType.routeTypeName)
+                HStack {
+                    TransportIconView(type: routeType.transportType)
+                    Text("\(routeType.routeTypeName)")
+                }
             }
         }
-        .onAppear(perform: appear)
-    }
-    
-    func appear() {
-        model.load()
+        .task { await model.bind() }
     }
 }
 
