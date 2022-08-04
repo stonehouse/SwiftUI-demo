@@ -9,7 +9,7 @@
 import Foundation
 import os
 
-actor PTVAsyncAPIAdapter: DataAdapter {
+class PTVAsyncAPIAdapter: DataAdapter {
     static let `default`: PTVAsyncAPIAdapter = {
         let token = PTVAccessToken(key: "27df7af0-a2e8-4dc9-805e-755035b5492d", developerID: 3001313)
         return PTVAsyncAPIAdapter(token: token, cache: true)
@@ -34,7 +34,7 @@ actor PTVAsyncAPIAdapter: DataAdapter {
             throw PTV.Errors.other
         }
         
-        if let cached = await cache.retrieveCache(for: url), let decoded = cached as? T.ResultType {
+        if endpoint.cache, let cached = await cache.retrieveCache(for: url), let decoded = cached as? T.ResultType {
             logger.debug("Loading \(endpoint.path) from cache...")
             return decoded
         }
