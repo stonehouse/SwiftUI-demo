@@ -12,7 +12,7 @@ import os
 class PTVAsyncAPIAdapter: DataAdapter {
     static let `default`: PTVAsyncAPIAdapter = {
         let token = PTVAccessToken(key: "27df7af0-a2e8-4dc9-805e-755035b5492d", developerID: 3001313)
-        return PTVAsyncAPIAdapter(token: token, cache: true)
+        return PTVAsyncAPIAdapter(token: token, cache: false)
     }()
     
     let token: PTVAccessToken
