@@ -70,21 +70,9 @@ class Departures: ViewModel {
             loading = true
             
             // Task group has to return an array of arrays because API can return multiple
-            async let dirs = withThrowingTaskGroup(of: [PTV.Models.Direction].self, body: { group in
-                var directions: [[PTV.Models.Direction]] = []
-                
-                for route in routes {
-                    group.addTask {
-                        try await ptv.request(endpoint: PTV.API.Directions(route: route)).directions
-                    }
-                }
-                
-                for try await direction in group {
-                    directions.append(direction)
-                }
-                
-                return directions
-            })
+            async let directions = routes.asyncMap { route in
+                return try await ptv.request(endpoint: PTV.API.Directions(route: route)).directions
+            }.flatMap { $0 }
             
             let endpoint: PTV.API.DeparturesAtStop
             if routes.count == 1 {
@@ -94,8 +82,8 @@ class Departures: ViewModel {
             }
             async let result = ptv.request(endpoint: endpoint)
             
-            directions = try await dirs.flatMap { $0 }
-            departures = try await result.departures.sorted(by: { $0.id > $1.id })
+            self.directions = try await directions
+            self.departures = try await result.departures.sorted(by: { $0.id > $1.id })
             loading = false
         } catch _ {
             
