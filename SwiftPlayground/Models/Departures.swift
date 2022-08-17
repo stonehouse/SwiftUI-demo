@@ -69,10 +69,11 @@ class Departures: ViewModel {
         do {
             loading = true
             
-            // Task group has to return an array of arrays because API can return multiple
-            async let directions = routes.asyncMap { route in
-                return try await ptv.request(endpoint: PTV.API.Directions(route: route)).directions
-            }.flatMap { $0 }
+            async let directions = routes
+                .asyncMap { route in
+                	try await ptv.request(endpoint: PTV.API.Directions(route: route)).directions
+            	}
+                .flatMap { $0 }
             
             let endpoint: PTV.API.DeparturesAtStop
             if routes.count == 1 {
