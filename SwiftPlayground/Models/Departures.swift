@@ -70,7 +70,7 @@ class Departures: ViewModel {
             loading = true
             
             async let directions = routes
-                .asyncMap { route in
+                .mapAsync { route in
                 	try await ptv.request(endpoint: PTV.API.Directions(route: route)).directions
             	}
                 .flatMap { $0 }

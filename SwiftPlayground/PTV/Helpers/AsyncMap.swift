@@ -9,7 +9,7 @@
 import Foundation
 
 extension Collection {
-    func asyncMap<T>(_ mapper: @escaping (Element) async throws -> T) async throws -> [T] {
+    func mapAsync<T>(_ mapper: @escaping (Element) async throws -> T) async throws -> [T] {
         return try await withThrowingTaskGroup(of: T.self, body: { group in
             var results: [T] = []
             
