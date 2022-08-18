@@ -21,6 +21,8 @@
 		69412865289A6F740036193D /* TransportIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69412864289A6F740036193D /* TransportIconView.swift */; };
 		69412867289B34B00036193D /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69412866289B34B00036193D /* LoadingView.swift */; };
 		69412869289B353A0036193D /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69412868289B353A0036193D /* ActivityIndicator.swift */; };
+		697BD07728ACBC01002113BA /* Task+sleep.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697BD07628ACBC01002113BA /* Task+sleep.swift */; };
+		697BD07928ACBE63002113BA /* AsyncMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 697BD07828ACBE63002113BA /* AsyncMap.swift */; };
 		698CCAFC2888E52D0017B50E /* PTVAsyncAPIAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698CCAFB2888E52D0017B50E /* PTVAsyncAPIAdapter.swift */; };
 		698CCAFE2888EA5B0017B50E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 698CCAFD2888EA5B0017B50E /* ViewModel.swift */; };
 		6991FB7F28991E220069FF6F /* Endpoint+prepareURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6991FB7E28991E220069FF6F /* Endpoint+prepareURL.swift */; };
@@ -66,6 +68,8 @@
 		69412864289A6F740036193D /* TransportIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportIconView.swift; sourceTree = "<group>"; };
 		69412866289B34B00036193D /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		69412868289B353A0036193D /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		697BD07628ACBC01002113BA /* Task+sleep.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+sleep.swift"; sourceTree = "<group>"; };
+		697BD07828ACBE63002113BA /* AsyncMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncMap.swift; sourceTree = "<group>"; };
 		698CCAFB2888E52D0017B50E /* PTVAsyncAPIAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTVAsyncAPIAdapter.swift; sourceTree = "<group>"; };
 		698CCAFD2888EA5B0017B50E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		6991FB7E28991E220069FF6F /* Endpoint+prepareURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Endpoint+prepareURL.swift"; sourceTree = "<group>"; };
@@ -174,6 +178,8 @@
 				FA6C703D2321B2A9007AA5C7 /* Data+HexEncodedString.swift */,
 				6991FB7E28991E220069FF6F /* Endpoint+prepareURL.swift */,
 				69412861289A6B000036193D /* PTV+Models+Extensions.swift */,
+				697BD07628ACBC01002113BA /* Task+sleep.swift */,
+				697BD07828ACBE63002113BA /* AsyncMap.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -359,6 +365,7 @@
 				69412862289A6B000036193D /* PTV+Models+Extensions.swift in Sources */,
 				FA6C703A2321B24A007AA5C7 /* PTV+API.swift in Sources */,
 				69412865289A6F740036193D /* TransportIconView.swift in Sources */,
+				697BD07928ACBE63002113BA /* AsyncMap.swift in Sources */,
 				FA6C703C2321B25F007AA5C7 /* PTV+Models.swift in Sources */,
 				37EB98C2233AC934006E0F65 /* StopsNearMeView.swift in Sources */,
 				69412867289B34B00036193D /* LoadingView.swift in Sources */,
@@ -376,6 +383,7 @@
 				378AED3223231E5B0085DFF9 /* Routes.swift in Sources */,
 				FA591F9123233F4B0066AD7A /* Endpoint.swift in Sources */,
 				6991FB832899223A0069FF6F /* PTVAccessToken.swift in Sources */,
+				697BD07728ACBC01002113BA /* Task+sleep.swift in Sources */,
 				378AED38232330200085DFF9 /* StopsOnRoute.swift in Sources */,
 				FA0DFFDB231E74EC00CB8B0A /* RootView.swift in Sources */,
 				FA6C70452321B7CE007AA5C7 /* RouteTypes.swift in Sources */,

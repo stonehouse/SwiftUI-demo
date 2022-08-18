@@ -68,19 +68,23 @@ class Departures: ViewModel {
     func bind() async {
         do {
             loading = true
-            for route in routes {
-                directions += try await ptv.request(endpoint: PTV.API.Directions(route: route)).directions
-            }
-
+            
+            async let directions = routes
+                .mapAsync { route in
+                	try await ptv.request(endpoint: PTV.API.Directions(route: route)).directions
+            	}
+                .flatMap { $0 }
+            
             let endpoint: PTV.API.DeparturesAtStop
             if routes.count == 1 {
                 endpoint = PTV.API.DeparturesAtStop(stop: stop, route: routes[0])
             } else {
                 endpoint = PTV.API.DeparturesAtStop(stop: stop)
             }
+            async let result = ptv.request(endpoint: endpoint)
             
-            let result = try await ptv.request(endpoint: endpoint)
-            departures = result.departures.sorted(by: { $0.id > $1.id })
+            self.directions = try await directions
+            self.departures = try await result.departures.sorted(by: { $0.id > $1.id })
             loading = false
         } catch _ {
             
